@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>希腊科学家流失 · Brain Drain</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- TopoJSON for world map -->
+    <script src="https://unpkg.com/topojson-client@3"></script>
+</head>
+<body>
+
+<!-- ===== 顶部导航 ===== -->
+<header id="top-nav">
+    <h1>🇬🇷 希腊科学家全球流失</h1>
+    <span class="subtitle">Comprehensive mapping of 63,951 Greek scientists</span>
+</header>
+
+<!-- ===== 仪表盘区域 ===== -->
+<section id="dashboard">
+    <!-- 全局筛选器 -->
+    <div id="global-filters">
+        <div class="filter-group">
+            <label>学科</label>
+            <select id="filter-field"><option value="all">全部</option></select>
+        </div>
+        <div class="filter-group">
+            <label>Top Percentile</label>
+            <select id="filter-percentile">
+                <option value="all">全部</option>
+                <option value="top_1">Top 1%</option>
+                <option value="top_5">Top 5%</option>
+                <option value="top_10">Top 10%</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>本土 / 海外</label>
+            <select id="filter-diaspora">
+                <option value="all">全部</option>
+                <option value="domestic">本土</option>
+                <option value="overseas">海外</option>
+            </select>
+        </div>
+        <button id="filter-reset">重置</button>
+    </div>
+
+    <!-- 概览卡片 -->
+    <div id="overview-cards">
+        <div class="card"><span class="card-number" id="card-total">—</span><span class="card-label">科学家总数</span></div>
+        <div class="card"><span class="card-number" id="card-countries">—</span><span class="card-label">分布国家</span></div>
+        <div class="card"><span class="card-number" id="card-overseas-pct">—</span><span class="card-label">海外占比</span></div>
+        <div class="card"><span class="card-number" id="card-top1">—</span><span class="card-label">Top 1% 人数</span></div>
+        <div class="card"><span class="card-number" id="card-median-citation">—</span><span class="card-label">中位引用</span></div>
+        <div class="card"><span class="card-number" id="card-median-h">—</span><span class="card-label">中位 h-index</span></div>
+    </div>
+
+    <!-- 主视觉：地图 + 柱状图 -->
+    <div id="main-charts">
+        <div id="map-container">
+            <h2>全球分布</h2>
+            <div id="map"></div>
+        </div>
+        <div id="barchart-container">
+            <h2>Top 10 国家</h2>
+            <div id="barchart"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 滚动叙事 ===== -->
+<article id="story">
+
+    <!-- 第一部分：全球扩散 -->
+    <section class="step" data-step="1">
+        <div class="step-text">
+            <h2>一、全球扩散</h2>
+            <p>希腊科学家遍布全球。超过 <strong id="text-overseas-pct"></strong>% 的希腊科学家目前在国外工作生活，前三大目的地为……</p>
+        </div>
+        <div class="step-chart" id="chart-scatter">
+            <!-- D3 渲染散点图：发文量 vs 引用量 -->
+        </div>
+    </section>
+
+    <!-- 第二部分：影响力差异 -->
+    <section class="step" data-step="2">
+        <div class="step-text">
+            <h2>二、影响力差异</h2>
+            <p>海外科学家的平均引用和 h-index 是否显著高于本土科学家？同等发文量下，海外是否更具影响力？</p>
+        </div>
+        <div class="step-chart" id="chart-boxplot">
+            <!-- D3 渲染盒须图 / 山脊线图 -->
+        </div>
+    </section>
+
+    <!-- 第三部分：学科结构 -->
+    <section class="step" data-step="3">
+        <div class="step-text">
+            <h2>三、学科结构</h2>
+            <p>哪些学科的人才流失最严重？不同国家承接了哪些学科方向的希腊科学家？</p>
+        </div>
+        <div class="step-chart" id="chart-treemap">
+            <!-- D3 渲染树图 / 热力矩阵 -->
+        </div>
+    </section>
+
+    <!-- 第四部分：顶尖人才迁移 -->
+    <section class="step" data-step="4">
+        <div class="step-text">
+            <h2>四、顶尖人才迁移</h2>
+            <p>最具影响力的科学家是否更倾向于流向海外？Top 1% 科学家在哪些国家聚集？</p>
+        </div>
+        <div class="step-chart" id="chart-top-talent">
+            <!-- D3 渲染顶尖人才分布 -->
+        </div>
+    </section>
+
+    <!-- 第五部分：下一代科学家 -->
+    <section class="step" data-step="5">
+        <div class="step-text">
+            <h2>五、下一代科学家</h2>
+            <p>年轻科学家是否仍在持续外流？学术年龄与海外流失之间是否存在趋势？</p>
+        </div>
+        <div class="step-chart" id="chart-age">
+            <!-- D3 渲染学术年龄分布 -->
+        </div>
+    </section>
+
+</article>
+
+<!-- ===== 页脚 ===== -->
+<footer>
+    <p>数据来源：Comprehensive mapping of local and diaspora scientists (63,951 Greek scientists)</p>
+    <p>数据可视化课程项目</p>
+</footer>
+
+<!-- ===== 脚本 ===== -->
+<script src="js/filters.js"></script>
+<script src="js/overviewCards.js"></script>
+<script src="js/map.js"></script>
+<script src="js/barChart.js"></script>
+<script src="js/scatterPlot.js"></script>
+<script src="js/boxPlot.js"></script>
+<script src="js/treemap.js"></script>
+<script src="js/heatmap.js"></script>
+<script src="js/topTalent.js"></script>
+<script src="js/academicAge.js"></script>
+<script src="js/scrollytelling.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
