@@ -1,72 +1,151 @@
-/**
- * 主入口：加载数据，初始化各模块
- */
+const DATA_PATH = '../data/processed';
 
-// ===== 数据加载 =====
-async function loadAllData() {
-    const [byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview] = await Promise.all([
-        fetch('data/by_country.json').then(r => r.json()),
-        fetch('data/top10_countries.json').then(r => r.json()),
-        fetch('data/by_field.json').then(r => r.json()),
-        fetch('data/diaspora_comparison.json').then(r => r.json()),
-        fetch('data/top_talent_by_country.json').then(r => r.json()),
-        fetch('data/academic_age.json').then(r => r.json()),
-        fetch('data/overview_stats.json').then(r => r.json())
-    ]);
+// Store for cross-module access (overviewCards.js checks window.__filteredCountryData)
+window.__filteredCountryData = null;
 
-    return { byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview };
+async function loadJson(fileName, fallback = []) {
+    try {
+        const response = await fetch(`${DATA_PATH}/${fileName}`);
+        if (!response.ok) throw new Error(`Failed to load ${fileName}`);
+        return response.json();
+    } catch (error) {
+        console.warn(error.message);
+        return fallback;
+    }
 }
 
-// ===== 初始化 =====
-async function init() {
-    // 先加载概览卡片（不依赖筛选）
-    renderOverviewCards();
+function getFilteredByCountry(allData, state) {
+    let data = allData;
+    if (state.field !== 'all') data = data.filter(d => d['sm-field'] === state.field);
+    if (state.percentile !== 'all') data = data.filter(d => d.percentile_group === state.percentile);
+    if (state.diaspora !== 'all') {
+        const target = state.diaspora === 'overseas' ? 1 : 0;
+        data = data.filter(d => d.is_diaspora === target);
+    }
 
-    // 初始化筛选器
-    initFilters();
+    // Group and aggregate by country
+    const map = new Map();
+    const fieldCounts = new Map();
 
-    // 加载全量数据（仅做演示用，大数据量时需按需加载）
-    const data = await loadAllData();
+    data.forEach(d => {
+        const key = d.cntry;
+        if (!map.has(key)) {
+            map.set(key, {
+                total: 0, overseas: 0, domestic: 0,
+                vals: []
+            });
+            fieldCounts.set(key, {});
+        }
+        const g = map.get(key);
+        g.total += d.total;
+        if (d.is_diaspora === 1) g.overseas += d.total;
+        else g.domestic += d.total;
+        g.vals.push(d);
 
-    // 初始渲染（默认全量数据）
-    renderMap(data.byCountry, FilterState);
-    renderBarChart(data.byCountry);
-
-    // 绑定筛选联动（示例：仅联动地图和柱状图，其余图表演示略）
-    onFilterChange(state => {
-        // 根据筛选条件过滤数据（demo 阶段先直接传全部）
-        renderMap(data.byCountry, state);
-        renderBarChart(data.byCountry);
+        const fc = fieldCounts.get(key);
+        fc[d['sm-field']] = (fc[d['sm-field']] || 0) + d.total;
     });
 
-    // 滚动叙事各章节注册
-    onStepEnter(1, () => {
-        // 散点图（从聚合后的 JSON 采样，避免加载 6 万行 CSV）
-        fetch('data/scatter_sample.json').then(r => r.json()).then(data => {
-            renderScatterPlot(data);
-        });
+    return Array.from(map.entries()).map(([country, g]) => {
+        const overseasPct = g.total > 0 ? Math.round((g.overseas / g.total) * 10000) / 100 : 0;
+        const medianCitation = d3.median(g.vals, d => d.median_citation);
+        const medianHindex = d3.median(g.vals, d => d.median_hindex);
+
+        const fc = fieldCounts.get(country);
+        const entries = Object.entries(fc).sort((a, b) => b[1] - a[1]);
+        const topField = entries.length ? entries[0][0] : '';
+
+        // top_1_count sums only rows where percentile_group is 'top_1'
+        const top1Count = d3.sum(g.vals, d => d.percentile_group === 'top_1' ? d.total : 0);
+
+        return {
+            country,
+            total: g.total,
+            overseas: g.overseas,
+            domestic: g.domestic,
+            overseas_pct: overseasPct,
+            median_citation: medianCitation,
+            median_hindex: medianHindex,
+            top_1_count: top1Count,
+            top_field: topField,
+            scientist_count: g.total
+        };
+    }).sort((a, b) => b.total - a.total);
+}
+
+async function loadAllData() {
+    const [byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll] = await Promise.all([
+        loadJson('by_country.json'),
+        loadJson('top10_countries.json'),
+        loadJson('by_field.json'),
+        loadJson('diaspora_comparison.json'),
+        loadJson('top_talent_by_country.json'),
+        loadJson('academic_age.json'),
+        loadJson('overview_stats.json', {}),
+        loadJson('by_country_all.json', [])
+    ]);
+    window.__overviewStats = overview;
+    return { byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll };
+}
+
+async function init() {
+    initFilters();
+await loadOverviewCardsData();
+
+    const data = await loadAllData();
+
+    if (!data.byCountryAll.length) {
+        console.warn('by_country_all.json not loaded — filters will use static data');
+    }
+
+    function renderWithFilters(state) {
+        const filtered = data.byCountryAll.length
+            ? getFilteredByCountry(data.byCountryAll, state)
+            : data.byCountry;
+
+        window.__filteredCountryData = filtered;
+        renderMap(filtered);
+        renderBarChart(filtered);
+        renderCards(getSelectedCountry());
+    }
+
+    // Register filter & country listeners before setting defaults
+    onFilterChange(state => {
+        renderWithFilters(state);
+    });
+
+    onCountryChange(country => {
+        renderCards(country);
+    });
+
+    // Initial render using whatever data we have
+    renderWithFilters(FilterState);
+
+    // Default to Greece — triggers onCountryChange listener registered above
+    setSelectedCountry('grc', 'Greece');
+
+    onStepEnter(1, async () => {
+        const sample = await loadJson('scatter_sample.json', []);
+        if (sample.length) renderScatterPlot(sample);
     });
 
     onStepEnter(2, () => {
-        renderBoxPlot(data.diasporaComp);
+        if (data.diasporaComp.length) renderBoxPlot(data.diasporaComp);
     });
 
     onStepEnter(3, () => {
-        // 树图占位（实际需加载 by_subfield.json）
         renderTreemap(null);
     });
 
     onStepEnter(4, () => {
-        renderTopTalent(data.topTalent);
+        if (data.topTalent.length) renderTopTalent(data.topTalent);
     });
 
     onStepEnter(5, () => {
-        renderAcademicAge(data.academicAge);
+        if (data.academicAge.length) renderAcademicAge(data.academicAge);
     });
 
-    // 启动滚动叙事
     initScrollytelling();
 }
 
-// ===== 启动 =====
 document.addEventListener('DOMContentLoaded', init);
