@@ -2,7 +2,7 @@ let _rlDiasporaData = null;
 let _rlMetric = 'nc';
 
 function loadRidgelineData() {
-    const path = '../data/processed/diaspora_comparison.json';
+    const path = 'data/processed/diaspora_comparison.json';
     console.log('Ridgeline: fetching', path);
     fetch(path)
         .then(r => {

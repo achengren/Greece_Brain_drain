@@ -23,3 +23,5 @@ Thumbs.db
 
 # VSCode
 .vscode/
+
+.calude/

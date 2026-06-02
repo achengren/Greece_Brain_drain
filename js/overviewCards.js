@@ -11,9 +11,9 @@ function loadOverviewCardsData() {
         });
     }
     return Promise.all([
-        fetch('../data/processed/overview_stats.json').then(r => r.json()).catch(() => ({})),
-        fetch('../data/processed/by_country.json').then(r => r.json()).catch(() => []),
-        fetch('../data/processed/by_field.json').then(r => r.json()).catch(() => [])
+        fetch('data/processed/overview_stats.json').then(r => r.json()).catch(() => ({})),
+        fetch('data/processed/by_country.json').then(r => r.json()).catch(() => []),
+        fetch('data/processed/by_field.json').then(r => r.json()).catch(() => [])
     ]).then(([overview, byCountry, byField]) => {
         overviewStats = overview;
         byCountryData = byCountry;

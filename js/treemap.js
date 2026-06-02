@@ -7,7 +7,7 @@ function renderTreemap(data) {
         return;
     }
 
-    fetch('../data/processed/by_field.json')
+    fetch('data/processed/by_field.json')
         .then(r => r.json())
         .then(fields => {
             if (fields.length) drawTreemap(container, fields);

@@ -1,4 +1,4 @@
-const DATA_PATH = '../data/processed';
+const DATA_PATH = 'data/processed';
 
 // Store for cross-module access (overviewCards.js checks window.__filteredCountryData)
 window.__filteredCountryData = null;

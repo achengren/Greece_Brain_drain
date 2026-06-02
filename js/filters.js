@@ -113,7 +113,7 @@ function initFilters() {
     document.addEventListener('click', closeAllDropdowns);
 
     // Load fields into the field dropdown
-    fetch('../data/processed/by_field.json')
+    fetch('data/processed/by_field.json')
         .then(r => r.json())
         .then(fields => {
             fields.forEach(f => addOptionToFieldSelect(f.field));
