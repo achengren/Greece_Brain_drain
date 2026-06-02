@@ -1,16 +1,3 @@
-const COUNTRY_LABELS = {
-    grc: 'Greece',
-    usa: 'United States',
-    gbr: 'United Kingdom',
-    deu: 'Germany',
-    cyp: 'Cyprus',
-    aus: 'Australia',
-    fra: 'France',
-    can: 'Canada',
-    che: 'Switzerland',
-    nld: 'Netherlands'
-};
-
 let _barSvg = null;
 let _barBuilt = false;
 
