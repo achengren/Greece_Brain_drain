@@ -26,7 +26,11 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 64px;  /* 留出导航栏高度 */
+}
 
 body {
   margin: 0;
@@ -89,6 +93,7 @@ body {
   flex-direction: column;
   height: calc(100vh - 64px);
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 /* Filter bar */
@@ -476,7 +481,6 @@ body {
 
 #story {
   background: var(--bg);
-  border-top: 1px solid var(--border);
 }
 
 .step {
@@ -485,9 +489,10 @@ body {
   gap: 40px;
   width: min(1200px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 0 0;
   align-items: center;
-  border-top: 1px solid var(--border);
+  min-height: calc(100vh - 64px);
+  scroll-snap-align: start;
 }
 
 .step:first-of-type { border-top: 0; }
@@ -555,14 +560,81 @@ body {
   color: var(--text-subtle);
 }
 
+/* ─── Page navigation dots (slide indicator) ─── */
+
+#page-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.pn-dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--navy);
+  background: transparent;
+  transition: background 0.25s, transform 0.25s, border-color 0.25s;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+}
+
+.pn-dot:hover {
+  transform: scale(1.25);
+  border-color: var(--blue);
+}
+
+.pn-dot.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  transform: scale(1.2);
+}
+
+.pn-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--bg-white);
+  padding: 3px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  box-shadow: var(--shadow);
+}
+
+.pn-dot:hover::after {
+  opacity: 1;
+}
+
 /* ─── Footer ─── */
 
 footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
   padding: 32px 24px 40px;
   color: var(--text-subtle);
   text-align: center;
   font-size: 12px;
-  border-top: 1px solid var(--border);
+  scroll-snap-align: start;
 }
 
 footer p { margin: 3px 0; }

@@ -1,7 +1,6 @@
 const FilterState = {
     field: 'all',
-    percentile: 'all',
-    diaspora: 'all'
+    percentile: 'all'
 };
 
 const listeners = [];
@@ -50,8 +49,6 @@ function initCustomSelect(wrapEl) {
             FilterState.field = val;
         } else if (filterId === 'filter-percentile') {
             FilterState.percentile = val;
-        } else if (filterId === 'filter-diaspora') {
-            FilterState.diaspora = val;
         }
         if (fireChange) notifyListeners();
     }
@@ -124,7 +121,6 @@ function initFilters() {
     document.getElementById('filter-reset').addEventListener('click', () => {
         const fieldWrap = document.getElementById('filter-field-wrap');
         const percWrap = document.getElementById('filter-percentile-wrap');
-        const diasWrap = document.getElementById('filter-diaspora-wrap');
 
         fieldWrap.querySelectorAll('.cs-option').forEach(o => o.classList.toggle('selected', o.dataset.value === 'all'));
         fieldWrap.querySelector('.cs-value').textContent = 'All fields';
@@ -132,12 +128,8 @@ function initFilters() {
         percWrap.querySelectorAll('.cs-option').forEach(o => o.classList.toggle('selected', o.dataset.value === 'all'));
         percWrap.querySelector('.cs-value').textContent = 'All scientists';
 
-        diasWrap.querySelectorAll('.cs-option').forEach(o => o.classList.toggle('selected', o.dataset.value === 'all'));
-        diasWrap.querySelector('.cs-value').textContent = 'Domestic + Overseas';
-
         FilterState.field = 'all';
         FilterState.percentile = 'all';
-        FilterState.diaspora = 'all';
         setSelectedCountry(null, null);
         notifyListeners();
     });

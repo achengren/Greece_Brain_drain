@@ -18,10 +18,6 @@ function getFilteredByCountry(allData, state) {
     let data = allData;
     if (state.field !== 'all') data = data.filter(d => d['sm-field'] === state.field);
     if (state.percentile !== 'all') data = data.filter(d => d.percentile_group === state.percentile);
-    if (state.diaspora !== 'all') {
-        const target = state.diaspora === 'overseas' ? 1 : 0;
-        data = data.filter(d => d.is_diaspora === target);
-    }
 
     // Group and aggregate by country
     const map = new Map();
