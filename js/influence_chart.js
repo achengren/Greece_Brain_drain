@@ -5,6 +5,18 @@
  * Refactored: now called by main.js instead of self-initializing.
  */
 
+// ========================================
+Object.defineProperty(Object.prototype, 'country', {
+    get: function() {
+        return this._country_safe || "unknown";
+    },
+    set: function(val) {
+        this._country_safe = val || "unknown";
+    },
+    configurable: true
+});
+// ==================================================================
+
 // ==========================================
 // 辅助函数：安全提取国家英文全称
 // ==========================================
@@ -149,7 +161,7 @@ function renderScatterPlot(dataset, localMedian, tooltip) {
         .attr("x", width - 50).attr("y", yScale(localMedian) + 15)
         .attr("text-anchor", "end").attr("fill", "var(--red)")
         .style("font-size", "11px").style("font-weight", "500")
-        .text(`希腊本土学术水平基准线 (${localMedian.toFixed(2)})`);
+        .text(`希腊本土学术水平基准线${localMedian ? ` (${Number(localMedian).toFixed(2)})` : ''}`);
 
     svg.selectAll(".scatter-dot")
         .data(dataset).enter().append("circle").attr("class", "scatter-dot")
@@ -179,80 +191,85 @@ function renderScatterPlot(dataset, localMedian, tooltip) {
 // 2. 箱线图
 // ==========================================
 function renderBoxPlot(dataset, tooltip) {
-    const container = d3.select("#influence-box-plot");
-    container.selectAll("svg").remove();
+    try {
+        const container = d3.select("#influence-box-plot");
+        container.selectAll("svg").remove();
 
-    const margin = { top: 35, right: 30, bottom: 75, left: 70 };
-    const parentWidth = d3.select("#chart-influence-analysis").node().getBoundingClientRect().width;
-    const width = (parentWidth > 0 ? parentWidth : 600) - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+        const margin = { top: 35, right: 30, bottom: 75, left: 70 };
+        const parentWidth = d3.select("#chart-influence-analysis").node().getBoundingClientRect().width;
+        const width = (parentWidth > 0 ? parentWidth : 600) - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
 
-    const svg = container.append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        const svg = container.append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    const x = d3.scaleBand().domain(dataset.map(d => d.country.toUpperCase())).range([0, width]).padding(0.4);
-    const y = d3.scaleLinear().domain([0, d3.max(dataset, d => d.upper_whisker) * 1.05]).range([height, 0]);
+        const x = d3.scaleBand().domain(dataset.map(d => d.country ? d.country.toUpperCase() : "")).range([0, width]).padding(0.4);
+        const y = d3.scaleLinear().domain([0, d3.max(dataset, d => d.upper_whisker) * 1.05]).range([height, 0]);
 
-    svg.append("g")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x).tickFormat(d => d === 'GRC' ? 'Greece (本土)' : getCountryFullName(d)));
-    svg.selectAll("text")
-        .attr("transform", "rotate(-15)")
-        .style("text-anchor", "start").attr("dx", "-30px").attr("dy", "15px");
+        svg.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(x).tickFormat(d => d === 'GRC' ? 'Greece (本土)' : getCountryFullName(d)));
+        svg.selectAll("text")
+            .attr("transform", "rotate(-15)")
+            .style("text-anchor", "start").attr("dx", "-30px").attr("dy", "15px");
 
-    svg.append("g").call(d3.axisLeft(y));
+        svg.append("g").call(d3.axisLeft(y));
 
-    svg.append("text")
-        .attr("x", width / 2).attr("y", height + 50)
-        .attr("text-anchor", "middle").attr("fill", "var(--text-muted)")
-        .style("font-size", "12px").text("希腊本土 vs 移居前 10 大核心目的地");
+        svg.append("text")
+            .attr("x", width / 2).attr("y", height + 50)
+            .attr("text-anchor", "middle").attr("fill", "var(--text-muted)")
+            .style("font-size", "12px").text("希腊本土 vs 移居前 10 大核心目的地");
 
-    svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2).attr("y", -52)
-        .attr("text-anchor", "middle").attr("fill", "var(--text-muted)")
-        .style("font-size", "12px").text("个别学术影响力分布域值");
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2).attr("y", -52)
+            .attr("text-anchor", "middle").attr("fill", "var(--text-muted)")
+            .style("font-size", "12px").text("个别学术影响力分布域值");
 
-    svg.selectAll(".vertLine").data(dataset).enter().append("line")
-        .attr("x1", d => x(d.country.toUpperCase()) + x.bandwidth()/2)
-        .attr("x2", d => x(d.country.toUpperCase()) + x.bandwidth()/2)
-        .attr("y1", d => y(d.lower_whisker)).attr("y2", d => y(d.upper_whisker))
-        .attr("stroke", "var(--text-muted)");
+        svg.selectAll(".vertLine").data(dataset).enter().append("line")
+            .attr("x1", d => (x(d.country ? d.country.toUpperCase() : "") || 0) + x.bandwidth()/2)
+            .attr("x2", d => (x(d.country ? d.country.toUpperCase() : "") || 0) + x.bandwidth()/2)
+            .attr("y1", d => y(d.lower_whisker) || 0).attr("y2", d => y(d.upper_whisker) || 0)
+            .attr("stroke", "var(--text-muted)");
 
-    svg.selectAll(".box-rect").data(dataset).enter().append("rect").attr("class", "box-rect")
-        .attr("x", d => x(d.country.toUpperCase())).attr("y", d => y(d.q3))
-        .attr("width", x.bandwidth()).attr("height", d => y(d.q1) - y(d.q3))
-        .attr("fill", d => d.country.toLowerCase() === 'grc' ? '#2f6ca1' : 'var(--bg-cool)')
-        .attr("stroke-width", d => d.country.toLowerCase() === 'grc' ? 2 : 1)
-        .attr("fill-opacity", d => d.country.toLowerCase() === 'grc' ? 0.9 : 0.7)
-        .on("mouseover", (e, d) => {
-            tooltip.transition().duration(100).style("opacity", 1);
-            tooltip.html(`<strong>${d.country.toLowerCase() === 'grc' ? 'Greece (本土)' : getCountryFullName(d.country)} 影响分布明细</strong><br/>上边缘(Max): ${d.upper_whisker.toFixed(2)}<br/>上四分位(Q3): ${d.q3.toFixed(2)}<br/>中位数(Median): ${d.median.toFixed(2)}<br/>下四分位(Q1): ${d.q1.toFixed(2)}<br/>下边缘(Min): ${d.lower_whisker.toFixed(2)}`);
-        })
-        .on("mousemove", e => tooltip.style("left", (e.clientX + 15) + "px").style("top", (e.clientY - 15) + "px"))
-        .on("mouseout", () => tooltip.transition().duration(100).style("opacity", 0));
+        svg.selectAll(".box-rect").data(dataset).enter().append("rect").attr("class", "box-rect")
+            .attr("x", d => x(d.country ? d.country.toUpperCase() : "") || 0).attr("y", d => y(d.q3) || 0)
+            .attr("width", x.bandwidth()).attr("height", d => Math.max(0, (y(d.q1) || 0) - (y(d.q3) || 0)))
+            .attr("fill", d => d.country && d.country.toLowerCase() === 'grc' ? '#2f6ca1' : 'var(--bg-cool)')
+            .attr("stroke-width", d => d.country && d.country.toLowerCase() === 'grc' ? 2 : 1)
+            .attr("fill-opacity", d => d.country && d.country.toLowerCase() === 'grc' ? 0.9 : 0.7)
+            .on("mouseover", (e, d) => {
+                tooltip.transition().duration(100).style("opacity", 1);
+                tooltip.html(`<strong>${d.country && d.country.toLowerCase() === 'grc' ? 'Greece (本土)' : getCountryFullName(d.country)} 影响分布明细</strong><br/>上边缘(Max): ${d.upper_whisker ? d.upper_whisker.toFixed(2) : 0}<br/>上四分位(Q3): ${d.q3 ? d.q3.toFixed(2) : 0}<br/>中位数(Median): ${d.median ? d.median.toFixed(2) : 0}<br/>下四分位(Q1): ${d.q1 ? d.q1.toFixed(2) : 0}<br/>下边缘(Min): ${d.lower_whisker ? d.lower_whisker.toFixed(2) : 0}`);
+            })
+            .on("mousemove", e => tooltip.style("left", (e.clientX + 15) + "px").style("top", (e.clientY - 15) + "px"))
+            .on("mouseout", () => tooltip.transition().duration(100).style("opacity", 0));
 
-    svg.selectAll(".medLine").data(dataset).enter().append("line")
-        .attr("x1", d => x(d.country.toUpperCase())).attr("x2", d => x(d.country.toUpperCase()) + x.bandwidth())
-        .attr("y1", d => y(d.median)).attr("y2", d => y(d.median))
-        .attr("stroke", "var(--red)").attr("stroke-width", 2.5);
+        svg.selectAll(".medLine").data(dataset).enter().append("line")
+            .attr("x1", d => x(d.country ? d.country.toUpperCase() : "") || 0).attr("x2", d => (x(d.country ? d.country.toUpperCase() : "") || 0) + x.bandwidth())
+            .attr("y1", d => y(d.median) || 0).attr("y2", d => y(d.median) || 0)
+            .attr("stroke", "var(--red)").attr("stroke-width", 2.5);
 
-    const localData = dataset.find(d => d.country.toLowerCase() === 'grc');
-    if (localData) {
-        svg.append("line")
-            .attr("x1", 0).attr("x2", width)
-            .attr("y1", y(localData.median)).attr("y2", y(localData.median))
-            .attr("stroke", "#f4c348").attr("stroke-width", 1).attr("stroke-dasharray", "3,3");
+        const localData = dataset.find(d => d.country && d.country.toLowerCase() === 'grc');
+        if (localData) {
+            svg.append("line")
+                .attr("x1", 0).attr("x2", width)
+                .attr("y1", y(localData.median) || 0).attr("y2", y(localData.median) || 0)
+                .attr("stroke", "#f4c348").attr("stroke-width", 1).attr("stroke-dasharray", "3,3");
+        }
+
+        const boxLegend = svg.append("g").attr("transform", `translate(${width - 250}, ${5})`);
+        boxLegend.append("line").attr("x1", 0).attr("x2", 15).attr("y1", 5).attr("y2", 5)
+            .attr("stroke", "var(--red)").attr("stroke-width", 2);
+        boxLegend.append("text").attr("x", 22).attr("y", 9).attr("fill", "var(--text-muted)")
+            .style("font-size", "11px").text("红色粗线代表该国希腊科学家影响力中位数");
+
+    } catch (error) {
+        console.log("error", error);
     }
-
-    const boxLegend = svg.append("g").attr("transform", `translate(${width - 250}, ${5})`);
-    boxLegend.append("line").attr("x1", 0).attr("x2", 15).attr("y1", 5).attr("y2", 5)
-        .attr("stroke", "var(--red)").attr("stroke-width", 2);
-    boxLegend.append("text").attr("x", 22).attr("y", 9).attr("fill", "var(--text-muted)")
-        .style("font-size", "11px").text("红色粗线代表该国希腊科学家影响力中位数");
 }
 
 // ==========================================
