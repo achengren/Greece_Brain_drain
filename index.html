@@ -17,10 +17,11 @@
     <a class="logo-text" href="#">Greek Brain Drain</a>
     <div class="nav-links">
         <a href="#dashboard">Map</a>
-        <a href="#story">Story</a>
-        <a href="#spread">Spread</a>
-        <a href="#impact">Impact</a>
+        <a href="#spread">Quality</a>
+        <a href="#fields">Fields</a>
         <a href="#top-talent">Talent</a>
+        <a href="#next-gen">Age</a>
+        <a href="#influence-analysis">Influence</a>
     </div>
 </nav>
 
@@ -120,12 +121,12 @@
 </div>
 
 <nav id="page-nav">
-    <a href="#dashboard" class="pn-dot active" data-label="Overview"></a>
-    <a href="#spread" class="pn-dot" data-label="Global spread"></a>
-    <a href="#impact" class="pn-dot" data-label="Impact disparity"></a>
-    <a href="#fields" class="pn-dot" data-label="Field structure"></a>
+    <a href="#dashboard" class="pn-dot active"></a>
+    <a href="#spread" class="pn-dot" data-label="Quality gap"></a>
+    <a href="#fields" class="pn-dot" data-label="Fields"></a>
     <a href="#top-talent" class="pn-dot" data-label="Top talent"></a>
-    <a href="#next-gen" class="pn-dot" data-label="Next generation"></a>
+    <a href="#next-gen" class="pn-dot" data-label="Next gen"></a>
+    <a href="#influence-analysis" class="pn-dot" data-label="Influence"></a>
 </nav>
 
 <article id="story">
@@ -205,13 +206,66 @@
     <section class="step" id="next-gen" data-step="5">
         <div class="step-text">
             <span class="chapter-number">05</span>
-            <h2>Next generation</h2>
-            <p>Academic age reveals whether the outflow is ongoing. If younger researchers show higher overseas ratios, the migration trend is renewing itself.</p>
+            <h2>年龄与学术生涯分析</h2>
+            <p>学术年龄（论文发表时间跨度）是衡量科学家成熟度的重要指标。<strong>计算方式：学术年龄 = 最后一篇论文发表年份 - 第一篇论文发表年份</strong>。通过比较不同学术年龄段的国内外分布，我们可以发现人才流动的规律。</p>
+            <p style="margin-top: 12px; font-size: 14px; color: var(--text-muted);">
+                <strong>数据洞察：</strong>从分组视图可见，学术年龄在 <strong>0-5岁</strong> 阶段，海外科学家占比最高（51.88%），这表明刚进入学术界的年轻研究者更倾向于选择海外发展。随着学术年龄增长，本土科学家数量反超海外。
+            </p>
+            <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
+                <strong>关键发现：</strong>学术年龄 <strong>36岁以上</strong> 的资深科学家中，海外占比再次回升至44.08%，反映出高学术成就者更容易获得海外顶尖机构的青睐，形成<strong>"年轻外流、中年回流、资深再外流"</strong>的模式。
+            </p>
         </div>
         <div class="step-chart" id="chart-age" data-chart-title="Academic Age Distribution">
-            <div class="chart-placeholder">
-                <strong>Academic age trend</strong>
-                <span>Grouped bar chart showing domestic vs overseas ratios by academic age group.</span>
+            <div class="chart-controls">
+                <button id="view-grouped" class="view-btn active">分组视图</button>
+                <button id="view-detailed" class="view-btn">详细视图</button>
+                <div class="range-controls" id="range-controls" style="display:none;">
+                    <span>年龄范围:</span>
+                    <input type="number" id="age-start" value="0" min="0" max="60" placeholder="起始">
+                    <span>至</span>
+                    <input type="number" id="age-end" value="60" min="0" max="60" placeholder="结束">
+                    <button id="apply-range">应用</button>
+                </div>
+            </div>
+            <div class="chart-placeholder" style="display:none;"></div>
+        </div>
+    </section>
+
+    <section class="step" id="influence-analysis" data-step="6">
+        <!-- 左侧保持不动 -->
+        <div class="step-text">
+            <span class="chapter-number">06</span>
+            <h2>追求卓越：流失的初始动力</h2>
+            <p>希腊科学家的流失，究竟只是人口意义上的迁徙，还是一种对更高学术成就的主动选择？通过比较不同国家希腊科学家的影响力表现、个体成长上限与顶尖人才结构，我们发现：<strong>脑流失并非随机发生，而呈现出明显的“卓越选择”特征。</strong>越接近学术金字塔顶端的研究者，越倾向于流向拥有更优资源、更强网络与更高回报的科研中心。</p>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-subtle);">
+                💡 <strong>多维探索：</strong>我们绘制了三种不同视角的图表，可以从宏观规模与质量博弈、整体分布结构、以及核心大国的金字塔顶端精英比例全方位进行比对。
+            </p>
+        </div>
+        
+        <!-- 右侧容器：调整内部的 Flex 属性与元素的上下物理顺序 -->
+        <div class="step-chart" id="chart-influence-analysis" data-chart-title="Influence Analysis by Country">
+            
+            <!-- 1. 切换 Tab 依然在最上方 -->
+            <div class="influence-tabs" style="margin-bottom: 15px; display: flex; gap: 8px;">
+                <button class="inf-tab-btn active" data-target="influence-scatter-plot">📊 规模 vs 质量</button>
+                <button class="inf-tab-btn" data-target="influence-box-plot">📈 影响力分布</button>
+                <button class="inf-tab-btn" data-target="influence-stacked-bar">📐 顶尖精英占比</button>
+            </div>
+        
+            <div class="influence-layout-wrapper">
+                <!-- 解读放前面 -->
+                <div class="influence-text-insight">
+                    <h4 id="inf-insight-title"></h4>
+                    <p id="inf-insight-body"></p>
+                </div>
+
+                <!-- 图表放后面 -->
+                <div class="influence-charts-container">
+                    <div id="influence-scatter-plot" class="influence-chart-view"></div>
+                    <div id="influence-box-plot" class="influence-chart-view" style="display:none;"></div>
+                    <div id="influence-stacked-bar" class="influence-chart-view" style="display:none;"></div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -235,5 +289,5 @@
 <script src="js/academicAge.js"></script>
 <script src="js/scrollytelling.js"></script>
 <script src="js/main.js"></script>
-</body>
+<script src="js/influence_chart.js"></script>
 </html>

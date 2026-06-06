@@ -28,7 +28,6 @@
 *, *::before, *::after { box-sizing: border-box; }
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
   scroll-padding-top: 64px;  /* 留出导航栏高度 */
 }
 
@@ -93,7 +92,6 @@ body {
   flex-direction: column;
   height: calc(100vh - 64px);
   overflow: hidden;
-  scroll-snap-align: start;
 }
 
 /* Filter bar */
@@ -195,6 +193,22 @@ body {
 
 .cs-menu.open {
   opacity: 1;
+  overflow-y: auto;
+}
+
+/* 下拉菜单滚动条美化 */
+.cs-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.cs-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cs-menu::-webkit-scrollbar-thumb {
+  background: #c0c8d4;
+  border-radius: 3px;
+}
+.cs-menu::-webkit-scrollbar-thumb:hover {
+  background: #a0abb8;
 }
 
 .cs-option {
@@ -492,7 +506,6 @@ body {
   padding: 0 0;
   align-items: center;
   min-height: calc(100vh - 64px);
-  scroll-snap-align: start;
 }
 
 .step:first-of-type { border-top: 0; }
@@ -598,7 +611,7 @@ body {
   transform: scale(1.2);
 }
 
-.pn-dot::after {
+.pn-dot[data-label]::after {
   content: attr(data-label);
   position: absolute;
   right: 20px;
@@ -618,7 +631,15 @@ body {
   box-shadow: var(--shadow);
 }
 
-.pn-dot:hover::after {
+.pn-dot.active[data-label]::after {
+  opacity: 1;
+}
+
+.pn-dot[data-label]:hover::after {
+  opacity: 0;
+}
+
+.pn-dot.active[data-label]:hover::after {
   opacity: 1;
 }
 
@@ -634,7 +655,6 @@ footer {
   color: var(--text-subtle);
   text-align: center;
   font-size: 12px;
-  scroll-snap-align: start;
 }
 
 footer p { margin: 3px 0; }
@@ -711,4 +731,141 @@ svg text {
   #dashboard-body { padding: 0; }
   #overview-cards { grid-template-columns: repeat(2, 1fr); }
   .step { grid-template-columns: 1fr; }
+}
+
+/* Section 06 Influence Analysis Layout
+========================================== */
+
+#chart-influence-analysis {
+  width: 100%;
+}
+
+/* 整体纵向布局 */
+.influence-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* 解读区 */
+.influence-text-insight {
+  width: 100%;
+  padding: 16px 18px;
+  background: var(--bg-cool);
+  border-radius: 6px;
+  border-left: 4px solid var(--navy);
+
+  /* 关键 */
+  min-height: auto;
+  height: auto;
+}
+
+/* 标题 */
+.influence-text-insight h4 {
+  margin: 0 0 10px 0;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--navy);
+}
+
+/* 正文 */
+.influence-text-insight p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+/* 图表区域 */
+.influence-charts-container {
+  width: 100%;
+  min-height: 500px;
+  position: relative;
+}
+
+/* 三张图共享容器 */
+.influence-chart-view {
+  width: 100%;
+  min-height: 500px;
+}
+
+/* ─── View Toggle Buttons ─── */
+.chart-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.view-btn {
+  padding: 6px 16px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-cool);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  outline: none;
+}
+
+.view-btn:hover {
+  color: var(--text);
+  background: #dce5ef;
+}
+
+.view-btn.active {
+  color: #ffffff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.range-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 16px;
+  margin-left: 16px;
+  border-left: 1px solid var(--border);
+}
+
+.range-controls span {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.range-controls input[type="number"] {
+  width: 60px;
+  padding: 4px 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+}
+
+.range-controls input[type="number"]:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(43, 111, 159, 0.1);
+}
+
+.range-controls button {
+  padding: 4px 12px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: var(--radius);
+  cursor: pointer;
+  outline: none;
+}
+
+.range-controls button:hover {
+  background: var(--navy-light);
+  border-color: var(--navy-light);
 }

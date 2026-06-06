@@ -5,7 +5,7 @@ function onStepEnter(step, fn) {
 }
 
 function initScrollytelling() {
-    // 页面导航点：所有可 snap 的 section
+    // 页面导航点
     const sections = [
         document.getElementById('dashboard'),
         ...document.querySelectorAll('.step'),
@@ -33,7 +33,7 @@ function initScrollytelling() {
 
     sections.forEach(s => sectionObserver.observe(s));
 
-    // 步骤回调（原有的 scrollytelling）
+    // 步骤回调（平滑滚动下门槛降低，保证触发）
     const steps = document.querySelectorAll('.step');
     let activeStep = null;
 
@@ -43,8 +43,6 @@ function initScrollytelling() {
                 const step = parseInt(entry.target.dataset.step);
                 if (step !== activeStep) {
                     activeStep = step;
-                    steps.forEach(s => s.style.opacity = '0.5');
-                    entry.target.style.opacity = '1';
 
                     if (stepCallbacks[step]) {
                         stepCallbacks[step]();
@@ -52,18 +50,18 @@ function initScrollytelling() {
                 }
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.15 });
 
     steps.forEach(s => stepObserver.observe(s));
 
-    // 键盘导航（↑↓方向键翻页）
+    // 键盘导航（← → 方向键翻页）
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
             e.preventDefault();
-            const snapSections = ['#dashboard', '#spread', '#impact', '#fields', '#top-talent', '#next-gen'];
+            const snapSections = ['#dashboard', '#spread', '#impact', '#fields', '#top-talent', '#next-gen', '#influence-analysis'];
             const currentIdx = snapSections.findIndex(s => s === '#' + activeSection);
             if (currentIdx === -1) return;
-            const next = e.key === 'ArrowDown' ? currentIdx + 1 : currentIdx - 1;
+            const next = e.key === 'ArrowRight' ? currentIdx + 1 : currentIdx - 1;
             if (next >= 0 && next < snapSections.length) {
                 document.querySelector(snapSections[next]).scrollIntoView({ behavior: 'smooth' });
             }

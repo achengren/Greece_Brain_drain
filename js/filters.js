@@ -60,7 +60,7 @@ function initCustomSelect(wrapEl) {
         if (!isOpen) {
             trigger.classList.add('open');
             menu.classList.add('open');
-            menu.style.maxHeight = menu.scrollHeight + 'px';
+            menu.style.maxHeight = Math.min(menu.scrollHeight, 280) + 'px';
         }
     });
 
@@ -130,7 +130,7 @@ function initFilters() {
 
         FilterState.field = 'all';
         FilterState.percentile = 'all';
-        setSelectedCountry(null, null);
+        setSelectedCountry('grc', 'Greece');
         notifyListeners();
     });
 }
