@@ -12,8 +12,8 @@
   const COLOR_LOW  = '#bdd7ee';
   const COLOR_MID  = '#2b6f9f';
   const COLOR_HIGH = '#10325c';
-  const DOM_COLOR  = '#A0B4C8';
-  const OVS_COLOR  = '#10325c';
+  const DOM_COLOR  = '#b33636';
+  const OVS_COLOR  = '#2b6f9f';
 
   function drainColor(pct) {
     const t = Math.max(0, Math.min(1, (pct - 25) / 65));
@@ -70,21 +70,23 @@
   let _drillSort    = 'ovs';
   let _ro           = null;
 
-  /* ── Public entry ── */
+/* ── Public entry ── */
   window.renderTreemap = function (data) {
     _container = document.getElementById('chart-treemap');
     if (!_container) return;
-    if (data && data.length) {
-      _fieldData = data; _panelOpen = false;
-      _attachRO(); _drawTreemap(); return;
-    }
+    
     Promise.all([
       fetch('data/processed/by_field.json').then(r=>r.json()),
       fetch('data/processed/by_subfield.json').then(r=>r.json()),
     ]).then(([fields, subfields]) => {
       _fieldData = fields; _subfieldData = subfields;
-      _panelOpen = false; _attachRO(); _drawTreemap();
-    }).catch(() => _showPlaceholder());
+      _panelOpen = false; 
+      _attachRO(); 
+      _drawTreemap();
+    }).catch((err) => {
+      console.error("Treemap 數據加載失敗:", err);
+      _showPlaceholder();
+    });
   };
 
   function _attachRO() {
