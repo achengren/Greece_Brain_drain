@@ -198,6 +198,45 @@
             </div>
         </div>
     </section>
+
+    <section class="step" id="influence-analysis" data-step="6">
+        <!-- 左侧保持不动 -->
+        <div class="step-text">
+            <span class="chapter-number">06</span>
+            <h2>追求卓越：流失的初始动力</h2>
+            <p>希腊科学家的流失，究竟只是人口意义上的迁徙，还是一种对更高学术成就的主动选择？通过比较不同国家希腊科学家的影响力表现、个体成长上限与顶尖人才结构，我们发现：<strong>脑流失并非随机发生，而呈现出明显的“卓越选择”特征。</strong>越接近学术金字塔顶端的研究者，越倾向于流向拥有更优资源、更强网络与更高回报的科研中心。</p>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-subtle);">
+                💡 <strong>多维探索：</strong>我们绘制了三种不同视角的图表，可以从宏观规模与质量博弈、整体分布结构、以及核心大国的金字塔顶端精英比例全方位进行比对。
+            </p>
+        </div>
+        
+        <!-- 右侧容器：调整内部的 Flex 属性与元素的上下物理顺序 -->
+        <div class="step-chart" id="chart-influence-analysis" data-chart-title="Influence Analysis by Country">
+            
+            <!-- 1. 切换 Tab 依然在最上方 -->
+            <div class="influence-tabs" style="margin-bottom: 15px; display: flex; gap: 8px;">
+                <button class="inf-tab-btn active" data-target="influence-scatter-plot">📊 规模 vs 质量</button>
+                <button class="inf-tab-btn" data-target="influence-box-plot">📈 影响力分布</button>
+                <button class="inf-tab-btn" data-target="influence-stacked-bar">📐 顶尖精英占比</button>
+            </div>
+        
+            <div class="influence-layout-wrapper">
+                <!-- 解读放前面 -->
+                <div class="influence-text-insight">
+                    <h4 id="inf-insight-title"></h4>
+                    <p id="inf-insight-body"></p>
+                </div>
+
+                <!-- 图表放后面 -->
+                <div class="influence-charts-container">
+                    <div id="influence-scatter-plot" class="influence-chart-view"></div>
+                    <div id="influence-box-plot" class="influence-chart-view" style="display:none;"></div>
+                    <div id="influence-stacked-bar" class="influence-chart-view" style="display:none;"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 </article>
 
 <footer>
@@ -218,5 +257,5 @@
 <script src="js/academicAge.js"></script>
 <script src="js/scrollytelling.js"></script>
 <script src="js/main.js"></script>
-</body>
+<script src="js/influence_chart.js"></script>
 </html>

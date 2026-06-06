@@ -712,3 +712,60 @@ svg text {
   #overview-cards { grid-template-columns: repeat(2, 1fr); }
   .step { grid-template-columns: 1fr; }
 }
+
+/* Section 06 Influence Analysis Layout
+========================================== */
+
+#chart-influence-analysis {
+  width: 100%;
+}
+
+/* 整体纵向布局 */
+.influence-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* 解读区 */
+.influence-text-insight {
+  width: 100%;
+  padding: 16px 18px;
+  background: var(--bg-cool);
+  border-radius: 6px;
+  border-left: 4px solid var(--navy);
+
+  /* 关键 */
+  min-height: auto;
+  height: auto;
+}
+
+/* 标题 */
+.influence-text-insight h4 {
+  margin: 0 0 10px 0;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--navy);
+}
+
+/* 正文 */
+.influence-text-insight p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+/* 图表区域 */
+.influence-charts-container {
+  width: 100%;
+  min-height: 500px;
+  position: relative;
+}
+
+/* 三张图共享容器 */
+.influence-chart-view {
+  width: 100%;
+  min-height: 500px;
+}
