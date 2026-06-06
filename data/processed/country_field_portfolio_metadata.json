@@ -1,0 +1,38 @@
+{
+  "description": "Section 6 country-field portfolio analysis",
+  "diaspora_definition": "cntry != 'grc'",
+  "min_country_total": 50,
+  "min_cell_n": 10,
+  "top_countries": [
+    "usa",
+    "gbr",
+    "deu",
+    "cyp",
+    "aus",
+    "fra",
+    "can",
+    "che",
+    "nld",
+    "ita",
+    "swe",
+    "bel"
+  ],
+  "top_fields": [
+    "Clinical Medicine",
+    "Information & Communication Technologies",
+    "Physics & Astronomy",
+    "Biomedical Research",
+    "Engineering",
+    "Enabling & Strategic Technologies",
+    "Chemistry",
+    "Economics & Business",
+    "Social Sciences",
+    "Earth & Environmental Sciences",
+    "Psychology & Cognitive Sciences",
+    "Public Health & Health Services",
+    "Biology",
+    "Mathematics & Statistics",
+    "Agriculture, Fisheries & Forestry"
+  ],
+  "overall_diaspora_total": 26153
+}
