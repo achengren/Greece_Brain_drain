@@ -28,7 +28,6 @@
 *, *::before, *::after { box-sizing: border-box; }
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
   scroll-padding-top: 64px;  /* 留出导航栏高度 */
 }
 
@@ -93,7 +92,6 @@ body {
   flex-direction: column;
   height: calc(100vh - 64px);
   overflow: hidden;
-  scroll-snap-align: start;
 }
 
 /* Filter bar */
@@ -195,6 +193,22 @@ body {
 
 .cs-menu.open {
   opacity: 1;
+  overflow-y: auto;
+}
+
+/* 下拉菜单滚动条美化 */
+.cs-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.cs-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cs-menu::-webkit-scrollbar-thumb {
+  background: #c0c8d4;
+  border-radius: 3px;
+}
+.cs-menu::-webkit-scrollbar-thumb:hover {
+  background: #a0abb8;
 }
 
 .cs-option {
@@ -492,7 +506,6 @@ body {
   padding: 0 0;
   align-items: center;
   min-height: calc(100vh - 64px);
-  scroll-snap-align: start;
 }
 
 .step:first-of-type { border-top: 0; }
@@ -598,7 +611,7 @@ body {
   transform: scale(1.2);
 }
 
-.pn-dot::after {
+.pn-dot[data-label]::after {
   content: attr(data-label);
   position: absolute;
   right: 20px;
@@ -618,7 +631,15 @@ body {
   box-shadow: var(--shadow);
 }
 
-.pn-dot:hover::after {
+.pn-dot.active[data-label]::after {
+  opacity: 1;
+}
+
+.pn-dot[data-label]:hover::after {
+  opacity: 0;
+}
+
+.pn-dot.active[data-label]:hover::after {
   opacity: 1;
 }
 
@@ -634,7 +655,6 @@ footer {
   color: var(--text-subtle);
   text-align: center;
   font-size: 12px;
-  scroll-snap-align: start;
 }
 
 footer p { margin: 3px 0; }

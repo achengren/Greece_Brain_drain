@@ -70,7 +70,7 @@ function getFilteredByCountry(allData, state) {
 }
 
 async function loadAllData() {
-    const [byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll] = await Promise.all([
+    const [byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll, scatterSample, influenceAll] = await Promise.all([
         loadJson('by_country.json'),
         loadJson('top10_countries.json'),
         loadJson('by_field.json'),
@@ -78,15 +78,18 @@ async function loadAllData() {
         loadJson('top_talent_by_country.json'),
         loadJson('academic_age.json'),
         loadJson('overview_stats.json', {}),
-        loadJson('by_country_all.json', [])
+        loadJson('by_country_all.json', []),
+        loadJson('scatter_sample.json', []),
+        // influence_all_countries 只在 web/data/ 下，单独加载
+        fetch('web/data/influence_all_countries.json').then(r => r.json()).catch(() => null)
     ]);
     window.__overviewStats = overview;
-    return { byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll };
+    return { byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll, scatterSample, influenceAll };
 }
 
 async function init() {
     initFilters();
-await loadOverviewCardsData();
+    await loadOverviewCardsData();
 
     const data = await loadAllData();
 
@@ -120,25 +123,29 @@ await loadOverviewCardsData();
     // Default to Greece — triggers onCountryChange listener registered above
     setSelectedCountry('grc', 'Greece');
 
-    onStepEnter(1, async () => {
-        const sample = await loadJson('scatter_sample.json', []);
-        if (sample.length) renderScatterPlot(sample);
+    // 滚动触发渲染：用户滚到对应步骤时再画图
+    onStepEnter(1, () => {
+        if (data.scatterSample.length) renderScatterPlot(data.scatterSample);
     });
-
     onStepEnter(2, () => {
         if (data.diasporaComp.length) renderBoxPlot(data.diasporaComp);
     });
-
     onStepEnter(3, () => {
-        renderTreemap(null);
+        if (data.byField.length) {
+            renderTreemap(data.byField);
+        } else {
+            renderTreemap(null);
+        }
     });
-
     onStepEnter(4, () => {
         if (data.topTalent.length) renderTopTalent(data.topTalent);
     });
-
     onStepEnter(5, () => {
         if (data.academicAge.length) renderAcademicAge(data.academicAge);
+    });
+
+    onStepEnter(6, () => {
+        if (data.influenceAll) renderInfluenceCharts(data.influenceAll);
     });
 
     initScrollytelling();
