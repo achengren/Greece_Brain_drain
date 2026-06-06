@@ -189,14 +189,28 @@
     <section class="step" id="next-gen" data-step="5">
         <div class="step-text">
             <span class="chapter-number">05</span>
-            <h2>Next generation</h2>
-            <p>Academic age reveals whether the outflow is ongoing. If younger researchers show higher overseas ratios, the migration trend is renewing itself.</p>
+            <h2>年龄与学术生涯分析</h2>
+            <p>学术年龄（论文发表时间跨度）是衡量科学家成熟度的重要指标。<strong>计算方式：学术年龄 = 最后一篇论文发表年份 - 第一篇论文发表年份</strong>。通过比较不同学术年龄段的国内外分布，我们可以发现人才流动的规律。</p>
+            <p style="margin-top: 12px; font-size: 14px; color: var(--text-muted);">
+                <strong>数据洞察：</strong>从分组视图可见，学术年龄在 <strong>0-5岁</strong> 阶段，海外科学家占比最高（51.88%），这表明刚进入学术界的年轻研究者更倾向于选择海外发展。随着学术年龄增长，本土科学家数量反超海外。
+            </p>
+            <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
+                <strong>关键发现：</strong>学术年龄 <strong>36岁以上</strong> 的资深科学家中，海外占比再次回升至44.08%，反映出高学术成就者更容易获得海外顶尖机构的青睐，形成<strong>"年轻外流、中年回流、资深再外流"</strong>的模式。
+            </p>
         </div>
         <div class="step-chart" id="chart-age" data-chart-title="Academic Age Distribution">
-            <div class="chart-placeholder">
-                <strong>Academic age trend</strong>
-                <span>Grouped bar chart showing domestic vs overseas ratios by academic age group.</span>
+            <div class="chart-controls">
+                <button id="view-grouped" class="view-btn active">分组视图</button>
+                <button id="view-detailed" class="view-btn">详细视图</button>
+                <div class="range-controls" id="range-controls" style="display:none;">
+                    <span>年龄范围:</span>
+                    <input type="number" id="age-start" value="0" min="0" max="60" placeholder="起始">
+                    <span>至</span>
+                    <input type="number" id="age-end" value="60" min="0" max="60" placeholder="结束">
+                    <button id="apply-range">应用</button>
+                </div>
             </div>
+            <div class="chart-placeholder" style="display:none;"></div>
         </div>
     </section>
 
