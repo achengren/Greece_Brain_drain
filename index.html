@@ -19,8 +19,8 @@
         <a href="#dashboard">Map</a>
         <a href="#spread">Quality</a>
         <a href="#fields">Fields</a>
-        <a href="#top-talent">Talent</a>
         <a href="#next-gen">Age</a>
+        <a href="#author-role">作者主导性</a>
         <a href="#influence-analysis">Influence</a>
     </div>
 </nav>
@@ -124,8 +124,8 @@
     <a href="#dashboard" class="pn-dot active"></a>
     <a href="#spread" class="pn-dot" data-label="Quality gap"></a>
     <a href="#fields" class="pn-dot" data-label="Fields"></a>
-    <a href="#top-talent" class="pn-dot" data-label="Top talent"></a>
     <a href="#next-gen" class="pn-dot" data-label="Next gen"></a>
+    <a href="#author-role" class="pn-dot" data-label="作者主导性"></a>
     <a href="#influence-analysis" class="pn-dot" data-label="Influence"></a>
 </nav>
 
@@ -144,23 +144,9 @@
         </div>
     </section>
 
-    <section class="step" id="impact" data-step="2">
+    <section class="step" id="fields" data-step="2">
         <div class="step-text">
             <span class="chapter-number">02</span>
-            <h2>Impact disparity</h2>
-            <p>Do overseas Greek scientists publish more, or are they cited more for the same output? This section compares citation distributions, h-index, and the long tail of impact.</p>
-        </div>
-        <div class="step-chart" id="chart-boxplot" data-chart-title="Citation Distribution">
-            <div class="chart-placeholder">
-                <strong>Distribution comparison</strong>
-                <span>Box plot or ridge chart comparing citation distributions between domestic and overseas scientists, using log scale.</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="step" id="fields" data-step="3">
-        <div class="step-text">
-            <span class="chapter-number">03</span>
             <h2>学科间的<br>不对称流失</h2>
             <p>
                 人才流失在不同学科中的程度差异显著。
@@ -189,41 +175,29 @@
         </div>
     </section>
 
-    <section class="step" id="top-talent" data-step="4">
+    <section class="step" id="next-gen" data-step="3">
         <div class="step-text">
-            <span class="chapter-number">04</span>
-            <h2>Top talent migration</h2>
-            <p>If top 1% scientists are disproportionately overseas, brain drain is not just a quantity problem — it is a migration of scientific influence and knowledge networks.</p>
-        </div>
-        <div class="step-chart" id="chart-top-talent" data-chart-title="Top Talent by Country">
-            <div class="chart-placeholder">
-                <strong>Top percentile by country</strong>
-                <span>Compare top 1%, 5%, and 10% scientist distributions across countries.</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="step" id="next-gen" data-step="5">
-        <div class="step-text">
-            <span class="chapter-number">05</span>
-            <h2>年龄与学术生涯分析</h2>
-            <p>学术年龄（论文发表时间跨度）是衡量科学家成熟度的重要指标。<strong>计算方式：学术年龄 = 最后一篇论文发表年份 - 第一篇论文发表年份</strong>。通过比较不同学术年龄段的国内外分布，我们可以发现人才流动的规律。</p>
-            <p style="margin-top: 12px; font-size: 14px; color: var(--text-muted);">
-                <strong>数据洞察：</strong>从分组视图可见，学术年龄在 <strong>0-5岁</strong> 阶段，海外科学家占比最高（51.88%），这表明刚进入学术界的年轻研究者更倾向于选择海外发展。随着学术年龄增长，本土科学家数量反超海外。
-            </p>
-            <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
-                <strong>关键发现：</strong>学术年龄 <strong>36岁以上</strong> 的资深科学家中，海外占比再次回升至44.08%，反映出高学术成就者更容易获得海外顶尖机构的青睐，形成<strong>"年轻外流、中年回流、资深再外流"</strong>的模式。
-            </p>
+            <span class="chapter-number">03</span>
+            <h2>学术年龄分布<br>海外 vs 本土</h2>
+            <p>学术年龄揭示了人才流失是否仍在持续。如果年轻研究者显示出更高的海外比例，说明移民趋势正在自我延续。</p>
+            <p>
+                <strong>学术年龄定义：</strong>最后一篇论文发表年份 - 第一篇论文发表年份。例如，1988年发表第一篇，2020年发表最后一篇，则学术年龄为32岁。</p>
+            <p>
+                <strong>数据洞察：</strong>从分组视图可见，学术年龄在<strong>6-10岁</strong>阶段，海外科学家占比最高（53.9%），这表明进入学术界不久的年轻研究者更倾向于选择海外发展。随着学术年龄增长，本土科学家数量反超海外。</p>
+            <p>
+                <strong>关键发现：</strong>学术年龄<strong>36岁以上</strong>的资深科学家中，海外占比再次回升至44%，反映出高学术成就者更容易获得海外顶尖机构的青睐，形成"年轻外流、中年回流、资深再外流"的模式。</p>
+            <p>
+                使用上方按钮切换「分组视图」和「详细视图」，在详细视图中可通过滑块自定义查看特定年龄范围的分布情况。</p>
         </div>
         <div class="step-chart" id="chart-age" data-chart-title="Academic Age Distribution">
             <div class="chart-controls">
-                <button id="view-grouped" class="view-btn active">分组视图</button>
-                <button id="view-detailed" class="view-btn">详细视图</button>
-                <div class="range-controls" id="range-controls" style="display:none;">
+                <button class="view-btn active" id="view-grouped">分组视图</button>
+                <button class="view-btn" id="view-detailed">详细视图</button>
+                <div class="range-controls" id="range-controls" style="display: none;">
                     <span>年龄范围:</span>
-                    <input type="number" id="age-start" value="0" min="0" max="60" placeholder="起始">
-                    <span>至</span>
-                    <input type="number" id="age-end" value="60" min="0" max="60" placeholder="结束">
+                    <input type="number" id="age-start" min="0" max="60" value="0" placeholder="起始年龄">
+                    <span>到</span>
+                    <input type="number" id="age-end" min="0" max="60" value="60" placeholder="结束年龄">
                     <button id="apply-range">应用</button>
                 </div>
             </div>
@@ -231,10 +205,39 @@
         </div>
     </section>
 
-    <section class="step" id="influence-analysis" data-step="6">
+    <section class="step author-role-step" id="author-role" data-step="4">
+        <div class="step-text">
+            <span class="chapter-number">04</span>
+            <h2>当主角，还是当配角？</h2>
+            <div class="author-method-card">
+                <p><strong>计算方式：</strong>作者主导性衡量科学家在科研合作中是否承担核心角色。这里使用三种占比来观察不同层次的主导性：</p>
+                <div class="author-formula">
+                    <div class="author-formula-row">
+                        <span><b>主导作者占比</b> <strong>=</strong> 单作者、第一作者或最后作者论文数 <strong>÷</strong> 该作者总论文数</span>
+                    </div>
+                    <div class="author-formula-row">
+                        <span><b>第一作者占比</b> <strong>=</strong> 单作者或第一作者论文数 <strong>÷</strong> 该作者总论文数</span>
+                    </div>
+                    <div class="author-formula-row">
+                        <span><b>单作者占比</b> <strong>=</strong> 单作者论文数 <strong>÷</strong> 该作者总论文数</span>
+                    </div>
+                </div>
+            </div>
+            <p><strong>关键发现：</strong>全部学科中，海外科学家的主导作者占比中位数为 51.7%，本土为 43.2%，海外高出 8.5%。但在 Top 10%、Top 5% 和 Top 1% 中，差距分别收窄到 2.4%、1.4% 和 -1.4%。这说明顶尖科学家之间的作者主导性差异并不明显，整体差距更多来自非顶尖层级：本土留存群体中，主导性较低的科学家占比更高。</p>
+            <p>分学科看，历史研究、公共卫生与健康服务、临床医学和社会科学的海外优势最明显。其中临床医学样本最大，最适合支撑"海外科学家更常处在关键作者位置"的判断。</p>
+        </div>
+        <div class="step-chart" id="chart-author-role" data-chart-title="作者主导性交互分析">
+            <div class="chart-placeholder">
+                <strong>作者主导性交互分析</strong>
+                <span>比较不同学科和人才层级中，本土与海外科学家的关键作者位置差异。</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="step" id="influence-analysis" data-step="5">
         <!-- 左侧保持不动 -->
         <div class="step-text">
-            <span class="chapter-number">06</span>
+            <span class="chapter-number">05</span>
             <h2>追求卓越：流失的初始动力</h2>
             <p>希腊科学家的流失，究竟只是人口意义上的迁徙，还是一种对更高学术成就的主动选择？通过比较不同国家希腊科学家的影响力表现、个体成长上限与顶尖人才结构，我们发现：<strong>人才流失并非随机发生，而呈现出明显的“卓越选择”特征。</strong>越接近学术金字塔顶端的研究者，越倾向于流向拥有更优资源、更强网络与更高回报的科研中心。</p>
             <p style="margin-top: 12px; font-size: 13px; color: var(--text-subtle);">
@@ -284,6 +287,7 @@
 <script src="js/barChart.js"></script>
 <script src="js/scatterPlot.js"></script>
 <script src="js/boxPlot.js"></script>
+<script src="js/authorRole.js"></script>
 <script src="js/treemap.js"></script>
 <script src="js/topTalent.js"></script>
 <script src="js/academicAge.js"></script>

@@ -1,63 +1,429 @@
 [
-  {"age_group": "0", "total": 91, "domestic": 35, "overseas": 56, "overseas_pct": 61.54},
-  {"age_group": "1", "total": 510, "domestic": 248, "overseas": 262, "overseas_pct": 51.37},
-  {"age_group": "2", "total": 1535, "domestic": 713, "overseas": 822, "overseas_pct": 53.55},
-  {"age_group": "3", "total": 2412, "domestic": 1171, "overseas": 1241, "overseas_pct": 51.45},
-  {"age_group": "4", "total": 3061, "domestic": 1471, "overseas": 1590, "overseas_pct": 51.94},
-  {"age_group": "5", "total": 3317, "domestic": 1620, "overseas": 1697, "overseas_pct": 51.16},
-  {"age_group": "6", "total": 3418, "domestic": 1736, "overseas": 1682, "overseas_pct": 49.21},
-  {"age_group": "7", "total": 3339, "domestic": 1667, "overseas": 1672, "overseas_pct": 50.07},
-  {"age_group": "8", "total": 3264, "domestic": 1621, "overseas": 1643, "overseas_pct": 50.34},
-  {"age_group": "9", "total": 3147, "domestic": 1569, "overseas": 1578, "overseas_pct": 50.14},
-  {"age_group": "10", "total": 2879, "domestic": 1526, "overseas": 1353, "overseas_pct": 47.0},
-  {"age_group": "11", "total": 2838, "domestic": 1494, "overseas": 1344, "overseas_pct": 47.36},
-  {"age_group": "12", "total": 2766, "domestic": 1526, "overseas": 1240, "overseas_pct": 44.83},
-  {"age_group": "13", "total": 2564, "domestic": 1343, "overseas": 1221, "overseas_pct": 47.62},
-  {"age_group": "14", "total": 2382, "domestic": 1268, "overseas": 1114, "overseas_pct": 46.77},
-  {"age_group": "15", "total": 2186, "domestic": 1247, "overseas": 939, "overseas_pct": 42.96},
-  {"age_group": "16", "total": 1989, "domestic": 1139, "overseas": 850, "overseas_pct": 42.74},
-  {"age_group": "17", "total": 1715, "domestic": 975, "overseas": 740, "overseas_pct": 43.15},
-  {"age_group": "18", "total": 1681, "domestic": 1033, "overseas": 648, "overseas_pct": 38.55},
-  {"age_group": "19", "total": 1597, "domestic": 971, "overseas": 626, "overseas_pct": 39.2},
-  {"age_group": "20", "total": 1421, "domestic": 906, "overseas": 515, "overseas_pct": 36.24},
-  {"age_group": "21", "total": 1268, "domestic": 780, "overseas": 488, "overseas_pct": 38.49},
-  {"age_group": "22", "total": 1307, "domestic": 844, "overseas": 463, "overseas_pct": 35.42},
-  {"age_group": "23", "total": 1273, "domestic": 820, "overseas": 453, "overseas_pct": 35.59},
-  {"age_group": "24", "total": 1105, "domestic": 673, "overseas": 432, "overseas_pct": 39.1},
-  {"age_group": "25", "total": 1068, "domestic": 700, "overseas": 368, "overseas_pct": 34.46},
-  {"age_group": "26", "total": 964, "domestic": 621, "overseas": 343, "overseas_pct": 35.58},
-  {"age_group": "27", "total": 856, "domestic": 544, "overseas": 312, "overseas_pct": 36.45},
-  {"age_group": "28", "total": 814, "domestic": 497, "overseas": 317, "overseas_pct": 38.94},
-  {"age_group": "29", "total": 731, "domestic": 487, "overseas": 244, "overseas_pct": 33.38},
-  {"age_group": "30", "total": 708, "domestic": 439, "overseas": 269, "overseas_pct": 37.99},
-  {"age_group": "31", "total": 644, "domestic": 433, "overseas": 211, "overseas_pct": 32.76},
-  {"age_group": "32", "total": 555, "domestic": 336, "overseas": 219, "overseas_pct": 39.46},
-  {"age_group": "33", "total": 502, "domestic": 335, "overseas": 167, "overseas_pct": 33.27},
-  {"age_group": "34", "total": 539, "domestic": 345, "overseas": 194, "overseas_pct": 35.99},
-  {"age_group": "35", "total": 458, "domestic": 279, "overseas": 179, "overseas_pct": 39.08},
-  {"age_group": "36", "total": 414, "domestic": 278, "overseas": 136, "overseas_pct": 32.85},
-  {"age_group": "37", "total": 380, "domestic": 226, "overseas": 154, "overseas_pct": 40.53},
-  {"age_group": "38", "total": 352, "domestic": 225, "overseas": 127, "overseas_pct": 36.08},
-  {"age_group": "39", "total": 284, "domestic": 183, "overseas": 101, "overseas_pct": 35.56},
-  {"age_group": "40", "total": 247, "domestic": 145, "overseas": 102, "overseas_pct": 41.3},
-  {"age_group": "41", "total": 212, "domestic": 115, "overseas": 97, "overseas_pct": 45.75},
-  {"age_group": "42", "total": 188, "domestic": 100, "overseas": 88, "overseas_pct": 46.81},
-  {"age_group": "43", "total": 154, "domestic": 84, "overseas": 70, "overseas_pct": 45.45},
-  {"age_group": "44", "total": 132, "domestic": 65, "overseas": 67, "overseas_pct": 50.76},
-  {"age_group": "45", "total": 131, "domestic": 61, "overseas": 70, "overseas_pct": 53.44},
-  {"age_group": "46", "total": 97, "domestic": 45, "overseas": 52, "overseas_pct": 53.61},
-  {"age_group": "47", "total": 83, "domestic": 30, "overseas": 53, "overseas_pct": 63.86},
-  {"age_group": "48", "total": 60, "domestic": 30, "overseas": 30, "overseas_pct": 50.0},
-  {"age_group": "49", "total": 50, "domestic": 19, "overseas": 31, "overseas_pct": 62.0},
-  {"age_group": "50", "total": 47, "domestic": 19, "overseas": 28, "overseas_pct": 59.57},
-  {"age_group": "51", "total": 36, "domestic": 18, "overseas": 18, "overseas_pct": 50.0},
-  {"age_group": "52", "total": 33, "domestic": 16, "overseas": 17, "overseas_pct": 51.52},
-  {"age_group": "53", "total": 27, "domestic": 12, "overseas": 15, "overseas_pct": 55.56},
-  {"age_group": "54", "total": 28, "domestic": 9, "overseas": 19, "overseas_pct": 67.86},
-  {"age_group": "55", "total": 19, "domestic": 8, "overseas": 11, "overseas_pct": 57.89},
-  {"age_group": "56", "total": 11, "domestic": 4, "overseas": 7, "overseas_pct": 63.64},
-  {"age_group": "57", "total": 15, "domestic": 3, "overseas": 12, "overseas_pct": 80.0},
-  {"age_group": "58", "total": 7, "domestic": 1, "overseas": 6, "overseas_pct": 85.71},
-  {"age_group": "59", "total": 10, "domestic": 2, "overseas": 8, "overseas_pct": 80.0},
-  {"age_group": "60", "total": 7, "domestic": 1, "overseas": 6, "overseas_pct": 85.71}
+  {
+    "age_group": "0",
+    "total": 91,
+    "domestic": 35,
+    "overseas": 56,
+    "overseas_pct": 61.54
+  },
+  {
+    "age_group": "1",
+    "total": 510,
+    "domestic": 248,
+    "overseas": 262,
+    "overseas_pct": 51.37
+  },
+  {
+    "age_group": "2",
+    "total": 1535,
+    "domestic": 713,
+    "overseas": 822,
+    "overseas_pct": 53.55
+  },
+  {
+    "age_group": "3",
+    "total": 2412,
+    "domestic": 1171,
+    "overseas": 1241,
+    "overseas_pct": 51.45
+  },
+  {
+    "age_group": "4",
+    "total": 3061,
+    "domestic": 1471,
+    "overseas": 1590,
+    "overseas_pct": 51.94
+  },
+  {
+    "age_group": "5",
+    "total": 3317,
+    "domestic": 1620,
+    "overseas": 1697,
+    "overseas_pct": 51.16
+  },
+  {
+    "age_group": "6",
+    "total": 3418,
+    "domestic": 1736,
+    "overseas": 1682,
+    "overseas_pct": 49.21
+  },
+  {
+    "age_group": "7",
+    "total": 3339,
+    "domestic": 1667,
+    "overseas": 1672,
+    "overseas_pct": 50.07
+  },
+  {
+    "age_group": "8",
+    "total": 3264,
+    "domestic": 1621,
+    "overseas": 1643,
+    "overseas_pct": 50.34
+  },
+  {
+    "age_group": "9",
+    "total": 3147,
+    "domestic": 1569,
+    "overseas": 1578,
+    "overseas_pct": 50.14
+  },
+  {
+    "age_group": "10",
+    "total": 2879,
+    "domestic": 1526,
+    "overseas": 1353,
+    "overseas_pct": 47.0
+  },
+  {
+    "age_group": "11",
+    "total": 2838,
+    "domestic": 1494,
+    "overseas": 1344,
+    "overseas_pct": 47.36
+  },
+  {
+    "age_group": "12",
+    "total": 2766,
+    "domestic": 1526,
+    "overseas": 1240,
+    "overseas_pct": 44.83
+  },
+  {
+    "age_group": "13",
+    "total": 2564,
+    "domestic": 1343,
+    "overseas": 1221,
+    "overseas_pct": 47.62
+  },
+  {
+    "age_group": "14",
+    "total": 2382,
+    "domestic": 1268,
+    "overseas": 1114,
+    "overseas_pct": 46.77
+  },
+  {
+    "age_group": "15",
+    "total": 2186,
+    "domestic": 1247,
+    "overseas": 939,
+    "overseas_pct": 42.96
+  },
+  {
+    "age_group": "16",
+    "total": 1989,
+    "domestic": 1139,
+    "overseas": 850,
+    "overseas_pct": 42.74
+  },
+  {
+    "age_group": "17",
+    "total": 1715,
+    "domestic": 975,
+    "overseas": 740,
+    "overseas_pct": 43.15
+  },
+  {
+    "age_group": "18",
+    "total": 1681,
+    "domestic": 1033,
+    "overseas": 648,
+    "overseas_pct": 38.55
+  },
+  {
+    "age_group": "19",
+    "total": 1597,
+    "domestic": 971,
+    "overseas": 626,
+    "overseas_pct": 39.2
+  },
+  {
+    "age_group": "20",
+    "total": 1421,
+    "domestic": 906,
+    "overseas": 515,
+    "overseas_pct": 36.24
+  },
+  {
+    "age_group": "21",
+    "total": 1268,
+    "domestic": 780,
+    "overseas": 488,
+    "overseas_pct": 38.49
+  },
+  {
+    "age_group": "22",
+    "total": 1307,
+    "domestic": 844,
+    "overseas": 463,
+    "overseas_pct": 35.42
+  },
+  {
+    "age_group": "23",
+    "total": 1273,
+    "domestic": 820,
+    "overseas": 453,
+    "overseas_pct": 35.59
+  },
+  {
+    "age_group": "24",
+    "total": 1105,
+    "domestic": 673,
+    "overseas": 432,
+    "overseas_pct": 39.1
+  },
+  {
+    "age_group": "25",
+    "total": 1068,
+    "domestic": 700,
+    "overseas": 368,
+    "overseas_pct": 34.46
+  },
+  {
+    "age_group": "26",
+    "total": 964,
+    "domestic": 621,
+    "overseas": 343,
+    "overseas_pct": 35.58
+  },
+  {
+    "age_group": "27",
+    "total": 856,
+    "domestic": 544,
+    "overseas": 312,
+    "overseas_pct": 36.45
+  },
+  {
+    "age_group": "28",
+    "total": 814,
+    "domestic": 497,
+    "overseas": 317,
+    "overseas_pct": 38.94
+  },
+  {
+    "age_group": "29",
+    "total": 731,
+    "domestic": 487,
+    "overseas": 244,
+    "overseas_pct": 33.38
+  },
+  {
+    "age_group": "30",
+    "total": 708,
+    "domestic": 439,
+    "overseas": 269,
+    "overseas_pct": 37.99
+  },
+  {
+    "age_group": "31",
+    "total": 644,
+    "domestic": 433,
+    "overseas": 211,
+    "overseas_pct": 32.76
+  },
+  {
+    "age_group": "32",
+    "total": 555,
+    "domestic": 336,
+    "overseas": 219,
+    "overseas_pct": 39.46
+  },
+  {
+    "age_group": "33",
+    "total": 502,
+    "domestic": 335,
+    "overseas": 167,
+    "overseas_pct": 33.27
+  },
+  {
+    "age_group": "34",
+    "total": 539,
+    "domestic": 345,
+    "overseas": 194,
+    "overseas_pct": 35.99
+  },
+  {
+    "age_group": "35",
+    "total": 458,
+    "domestic": 279,
+    "overseas": 179,
+    "overseas_pct": 39.08
+  },
+  {
+    "age_group": "36",
+    "total": 414,
+    "domestic": 278,
+    "overseas": 136,
+    "overseas_pct": 32.85
+  },
+  {
+    "age_group": "37",
+    "total": 380,
+    "domestic": 226,
+    "overseas": 154,
+    "overseas_pct": 40.53
+  },
+  {
+    "age_group": "38",
+    "total": 352,
+    "domestic": 225,
+    "overseas": 127,
+    "overseas_pct": 36.08
+  },
+  {
+    "age_group": "39",
+    "total": 284,
+    "domestic": 183,
+    "overseas": 101,
+    "overseas_pct": 35.56
+  },
+  {
+    "age_group": "40",
+    "total": 247,
+    "domestic": 145,
+    "overseas": 102,
+    "overseas_pct": 41.3
+  },
+  {
+    "age_group": "41",
+    "total": 212,
+    "domestic": 115,
+    "overseas": 97,
+    "overseas_pct": 45.75
+  },
+  {
+    "age_group": "42",
+    "total": 188,
+    "domestic": 100,
+    "overseas": 88,
+    "overseas_pct": 46.81
+  },
+  {
+    "age_group": "43",
+    "total": 154,
+    "domestic": 84,
+    "overseas": 70,
+    "overseas_pct": 45.45
+  },
+  {
+    "age_group": "44",
+    "total": 132,
+    "domestic": 65,
+    "overseas": 67,
+    "overseas_pct": 50.76
+  },
+  {
+    "age_group": "45",
+    "total": 131,
+    "domestic": 61,
+    "overseas": 70,
+    "overseas_pct": 53.44
+  },
+  {
+    "age_group": "46",
+    "total": 97,
+    "domestic": 45,
+    "overseas": 52,
+    "overseas_pct": 53.61
+  },
+  {
+    "age_group": "47",
+    "total": 83,
+    "domestic": 30,
+    "overseas": 53,
+    "overseas_pct": 63.86
+  },
+  {
+    "age_group": "48",
+    "total": 60,
+    "domestic": 30,
+    "overseas": 30,
+    "overseas_pct": 50.0
+  },
+  {
+    "age_group": "49",
+    "total": 50,
+    "domestic": 19,
+    "overseas": 31,
+    "overseas_pct": 62.0
+  },
+  {
+    "age_group": "50",
+    "total": 47,
+    "domestic": 19,
+    "overseas": 28,
+    "overseas_pct": 59.57
+  },
+  {
+    "age_group": "51",
+    "total": 36,
+    "domestic": 18,
+    "overseas": 18,
+    "overseas_pct": 50.0
+  },
+  {
+    "age_group": "52",
+    "total": 33,
+    "domestic": 16,
+    "overseas": 17,
+    "overseas_pct": 51.52
+  },
+  {
+    "age_group": "53",
+    "total": 27,
+    "domestic": 12,
+    "overseas": 15,
+    "overseas_pct": 55.56
+  },
+  {
+    "age_group": "54",
+    "total": 28,
+    "domestic": 9,
+    "overseas": 19,
+    "overseas_pct": 67.86
+  },
+  {
+    "age_group": "55",
+    "total": 19,
+    "domestic": 8,
+    "overseas": 11,
+    "overseas_pct": 57.89
+  },
+  {
+    "age_group": "56",
+    "total": 11,
+    "domestic": 4,
+    "overseas": 7,
+    "overseas_pct": 63.64
+  },
+  {
+    "age_group": "57",
+    "total": 15,
+    "domestic": 3,
+    "overseas": 12,
+    "overseas_pct": 80.0
+  },
+  {
+    "age_group": "58",
+    "total": 7,
+    "domestic": 1,
+    "overseas": 6,
+    "overseas_pct": 85.71
+  },
+  {
+    "age_group": "59",
+    "total": 10,
+    "domestic": 2,
+    "overseas": 8,
+    "overseas_pct": 80.0
+  },
+  {
+    "age_group": "60",
+    "total": 7,
+    "domestic": 1,
+    "overseas": 6,
+    "overseas_pct": 85.71
+  }
 ]

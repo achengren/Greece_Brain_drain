@@ -58,7 +58,7 @@ function initScrollytelling() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
             e.preventDefault();
-            const snapSections = ['#dashboard', '#spread', '#impact', '#fields', '#top-talent', '#next-gen', '#influence-analysis'];
+            const snapSections = ['#dashboard', '#spread', '#fields', '#next-gen', '#author-role', '#influence-analysis'];
             const currentIdx = snapSections.findIndex(s => s === '#' + activeSection);
             if (currentIdx === -1) return;
             const next = e.key === 'ArrowRight' ? currentIdx + 1 : currentIdx - 1;
