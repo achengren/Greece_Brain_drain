@@ -64,17 +64,41 @@ function renderAuthorRole(authorRoleData) {
     update();
 
     function addSelect(parent, label, id, options, selected, onChange) {
-        const wrap = parent.append('label').attr('class', 'author-role-control');
+        const wrap = parent.append('div').attr('class', 'author-role-control');
         wrap.append('span').text(label);
-        const select = wrap.append('select').attr('id', id);
-        select.selectAll('option')
-            .data(options)
-            .join('option')
-            .attr('value', d => d.value)
-            .text(d => d.label);
-        select.property('value', selected);
-        select.on('change', event => onChange(event.target.value));
-        return select;
+        const ddWrap = wrap.append('div').attr('class', 'custom-select author-role-dd');
+        const trigger = ddWrap.append('button').attr('class', 'cs-trigger').attr('type', 'button');
+        const selOption = options.find(o => o.value === selected) || options[0];
+        trigger.html(`<span class="cs-value">${selOption.label}</span><span class="cs-arrow"></span>`);
+        const menu = ddWrap.append('ul').attr('class', 'cs-menu');
+        options.forEach(opt => {
+            const li = menu.append('li')
+                .attr('class', 'cs-option' + (opt.value === selected ? ' selected' : ''))
+                .attr('data-value', opt.value)
+                .text(opt.label);
+            li.on('click', (event) => {
+                event.stopPropagation();
+                menu.selectAll('.cs-option').classed('selected', false);
+                li.classed('selected', true);
+                trigger.select('.cs-value').text(opt.label);
+                trigger.classed('open', false);
+                menu.classed('open', false);
+                menu.style('max-height', '0');
+                onChange(opt.value);
+            });
+        });
+        trigger.on('click', (event) => {
+            event.stopPropagation();
+            const isOpen = menu.classed('open');
+            d3.selectAll('.cs-trigger.open').classed('open', false);
+            d3.selectAll('.cs-menu.open').each(function() { this.classList.remove('open'); this.style.maxHeight = '0'; });
+            if (!isOpen) {
+                trigger.classed('open', true);
+                menu.classed('open', true);
+                menu.style('max-height', Math.min(menu.node().scrollHeight, 240) + 'px');
+            }
+        });
+        return { wrap: ddWrap, trigger, menu };
     }
 
     function update() {

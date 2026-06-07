@@ -18,9 +18,10 @@
     <div class="nav-links">
         <a href="#dashboard">Map</a>
         <a href="#spread">Quality</a>
+        <a href="#impact">Distribution</a>
         <a href="#fields">Fields</a>
         <a href="#next-gen">Age</a>
-        <a href="#author-role">作者主导性</a>
+        <a href="#author-role">Authorship</a>
         <a href="#influence-analysis">Influence</a>
     </div>
 </nav>
@@ -123,9 +124,10 @@
 <nav id="page-nav">
     <a href="#dashboard" class="pn-dot active"></a>
     <a href="#spread" class="pn-dot" data-label="Quality gap"></a>
+    <a href="#impact" class="pn-dot" data-label="Distribution"></a>
     <a href="#fields" class="pn-dot" data-label="Fields"></a>
     <a href="#next-gen" class="pn-dot" data-label="Next gen"></a>
-    <a href="#author-role" class="pn-dot" data-label="作者主导性"></a>
+    <a href="#author-role" class="pn-dot" data-label="Authorship"></a>
     <a href="#influence-analysis" class="pn-dot" data-label="Influence"></a>
 </nav>
 
@@ -133,20 +135,34 @@
     <section class="step" id="spread" data-step="1">
         <div class="step-text">
             <span class="chapter-number">01</span>
-            <h2>Global spread</h2>
-            <p>Greek scientists are not evenly distributed. They cluster in a few major research hubs. The map shows spatial distribution; the ranking reveals just how concentrated the top destinations are.</p>
+            <h2>从数量流动到<br>影响力流动</h2>
+            <p>地图已经说明希腊科学家分布在世界各地；真正的问题是，海外科学家是否也更集中在高影响力区间。这里按论文产出分组，比较同等产出下本土与海外科学家的中位影响力，避免散点重叠掩盖趋势。</p>
         </div>
-        <div class="step-chart" id="chart-scatter" data-chart-title="Papers vs Citations Scatter Plot">
+        <div class="step-chart quality-chart" id="chart-scatter" data-chart-title="产出与影响力散点图">
             <div class="chart-placeholder">
-                <strong>Impact scatter plot</strong>
-                <span>Papers published vs citations received. Each point is a scientist, colored by domestic (red) or overseas (blue).</span>
+                <strong>产出与影响力散点图</strong>
+                <span>每个点代表一位科学家，颜色区分本土与海外。</span>
             </div>
         </div>
     </section>
 
-    <section class="step" id="fields" data-step="2">
+    <section class="step" id="impact" data-step="2">
         <div class="step-text">
             <span class="chapter-number">02</span>
+            <h2>最优秀的人才<br>在哪里发挥影响力</h2>
+            <p>如果海外组不仅人数多，而且在学科排名、上四分位和顶尖人才占比上更突出，人才流失就不只是数量迁移，而是科学影响力和学术网络的外移。下方分布图默认展示学科内排名百分位，数值越低代表越靠前。</p>
+        </div>
+        <div class="step-chart quality-chart" id="chart-boxplot" data-chart-title="本土与海外质量分布">
+            <div class="chart-placeholder">
+                <strong>质量分布对比</strong>
+                <span>小提琴图与箱线图展示本土/海外科学家的影响力分布。</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="step" id="fields" data-step="3">
+        <div class="step-text">
+            <span class="chapter-number">03</span>
             <h2>学科间的<br>不对称流失</h2>
             <p>
                 人才流失在不同学科中的程度差异显著。
@@ -175,9 +191,9 @@
         </div>
     </section>
 
-    <section class="step" id="next-gen" data-step="3">
+    <section class="step" id="next-gen" data-step="4">
         <div class="step-text">
-            <span class="chapter-number">03</span>
+            <span class="chapter-number">04</span>
             <h2>学术年龄分布<br>海外 vs 本土</h2>
             <p>学术年龄揭示了人才流失是否仍在持续。如果年轻研究者显示出更高的海外比例，说明移民趋势正在自我延续。</p>
             <p>
@@ -205,9 +221,9 @@
         </div>
     </section>
 
-    <section class="step author-role-step" id="author-role" data-step="4">
+    <section class="step author-role-step" id="author-role" data-step="5">
         <div class="step-text">
-            <span class="chapter-number">04</span>
+            <span class="chapter-number">05</span>
             <h2>当主角，还是当配角？</h2>
             <div class="author-method-card">
                 <p><strong>计算方式：</strong>作者主导性衡量科学家在科研合作中是否承担核心角色。这里使用三种占比来观察不同层次的主导性：</p>
@@ -234,10 +250,10 @@
         </div>
     </section>
 
-    <section class="step" id="influence-analysis" data-step="5">
+    <section class="step" id="influence-analysis" data-step="6">
         <!-- 左侧保持不动 -->
         <div class="step-text">
-            <span class="chapter-number">05</span>
+            <span class="chapter-number">06</span>
             <h2>追求卓越：流失的初始动力</h2>
             <p>希腊科学家的流失，究竟只是人口意义上的迁徙，还是一种对更高学术成就的主动选择？通过比较不同国家希腊科学家的影响力表现、个体成长上限与顶尖人才结构，我们发现：<strong>人才流失并非随机发生，而呈现出明显的“卓越选择”特征。</strong>越接近学术金字塔顶端的研究者，越倾向于流向拥有更优资源、更强网络与更高回报的科研中心。</p>
             <p style="margin-top: 12px; font-size: 13px; color: var(--text-subtle);">

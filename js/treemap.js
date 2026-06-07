@@ -6,7 +6,7 @@
    ============================================================ */
 (function () {
 
-  const MAIN_CUTOFF = 10;
+  const MAIN_CUTOFF = 99;
   const MIN_SHOW    = 10;
 
   const COLOR_LOW  = '#bdd7ee';
@@ -80,7 +80,7 @@
       fetch('data/processed/by_subfield.json').then(r=>r.json()),
     ]).then(([fields, subfields]) => {
       _fieldData = fields; _subfieldData = subfields;
-      _panelOpen = false; 
+      _panelOpen = true;
       _attachRO(); 
       _drawTreemap();
     }).catch((err) => {
@@ -138,12 +138,12 @@
       return el.offsetWidth || 640;
     }
     const cW = Math.max(200, _availW(_container) - 2);
-    const cH  = Math.max(200, _container.offsetHeight || 420);
+    const cH  = Math.max(380, _container.offsetHeight || 420);
 
     const HEADER_H = 44;
     const TOGGLE_H = smallNodes.length ? 26 : 0;
     const PANEL_H  = (_panelOpen && smallNodes.length)
-      ? Math.min(smallNodes.length*26+10, Math.round(cH*0.32)) : 0;
+      ? Math.min(smallNodes.length*26+10, Math.round(cH*0.42)) : 0;
     const tmH = Math.max(80, cH - HEADER_H - TOGGLE_H - PANEL_H);
 
     const wrap = d3.select(_container).append('div')
@@ -199,7 +199,7 @@
     const root=d3.hierarchy({children:nodes})
       .sum(d=>Math.sqrt(d.scientist_count))   /* sqrt scale: moderate compression */
       .sort((a,b)=>b.value-a.value);
-    d3.treemap().size([W,H]).padding(3).paddingOuter(2).round(true)(root);
+    d3.treemap().size([W,H]).padding(4).paddingOuter(3).round(true)(root);
 
     const maxTop1=d3.max(nodes,n=>n.top_1_count)||1;
     const g=svg.append('g').attr('clip-path',`url(#${cid})`);
@@ -228,7 +228,7 @@
       /* text labels */
       if (bw>46&&bh>22) {
         const tc=textColor(d.data.overseas_pct);
-        const fs=Math.min(12,Math.max(9,bw/10));
+        const fs=Math.min(13,Math.max(10,bw/10));
         const cpl=Math.max(4,Math.floor(bw/(fs*0.62)));
         const words=d.data.field.split(' ');
         let line1='',line2='',cur='',broke=false;
