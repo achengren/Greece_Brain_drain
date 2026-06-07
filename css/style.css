@@ -573,6 +573,294 @@ body {
   color: var(--text-subtle);
 }
 
+/* ─── Quality comparison charts ─── */
+
+.quality-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 560px;
+}
+
+.quality-chart-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.quality-chart-head h3 {
+  margin: 0 0 4px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--navy);
+}
+
+.quality-chart-note {
+  max-width: 560px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.quality-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.quality-metric-select {
+  height: 32px;
+  max-width: 180px;
+  padding: 0 30px 0 10px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  background: var(--bg-cool);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  outline: none;
+}
+
+.quality-metric-select:focus-visible {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(43,111,159,0.14);
+}
+
+.quality-scatter-canvas,
+.quality-violin-canvas {
+  width: 100%;
+  min-height: 420px;
+}
+
+.quality-bin-canvas {
+  min-height: 400px;
+}
+
+.quality-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.quality-kpi-card {
+  padding: 9px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 0;
+}
+
+.quality-kpi-card span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.quality-kpi-card strong {
+  display: block;
+  margin-top: 2px;
+  color: var(--navy);
+  font-size: 17px;
+  line-height: 1.16;
+  white-space: nowrap;
+}
+
+.quality-kpi-card em {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-subtle);
+  font-size: 12px;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.quality-grid line {
+  stroke: #e2e9f1;
+  stroke-dasharray: 2 3;
+}
+
+.quality-grid path {
+  display: none;
+}
+
+.quality-insight {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 12px 14px;
+  background: var(--bg-cool);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius);
+}
+
+.quality-insight strong {
+  flex-shrink: 0;
+  color: var(--navy);
+  font-size: 14px;
+}
+
+.quality-insight span {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.quality-summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.quality-stat,
+.quality-top-card {
+  padding: 10px 12px;
+  background: var(--bg-cool);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.quality-stat span,
+.quality-top-card span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quality-stat strong,
+.quality-top-card strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--navy);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.quality-stat em,
+.quality-top-card em {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-subtle);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.quality-top-summary {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.quality-top-note {
+  padding: 10px 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+  background: #f8fafc;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.quality-impact-summary .quality-stat {
+  background: #eef4fa;
+}
+
+.quality-impact-summary .quality-stat strong {
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.quality-top-bars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.quality-top-bars-note {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.quality-top-bars-note strong {
+  flex-shrink: 0;
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.quality-top-bar-row {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.quality-top-bar-label {
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.quality-top-bar-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.quality-top-bar-line {
+  display: grid;
+  grid-template-columns: 34px minmax(70px, 1fr) 44px;
+  gap: 7px;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.quality-top-bar-track {
+  height: 8px;
+  overflow: hidden;
+  background: #e5edf5;
+  border-radius: 999px;
+}
+
+.quality-top-bar-track i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.quality-top-bar-line em {
+  color: var(--text-subtle);
+  font-style: normal;
+  text-align: right;
+}
+
+.quality-impact-canvas {
+  min-height: 390px;
+}
+
+.quality-footnote {
+  color: var(--text-subtle);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 /* ─── Page navigation dots (slide indicator) ─── */
 
 #page-nav {
@@ -719,6 +1007,22 @@ svg text {
   }
   #map { min-height: 380px; }
   #barchart { min-height: 360px; }
+  .quality-chart-head {
+    flex-direction: column;
+  }
+  .quality-top-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .quality-kpi-row {
+    grid-template-columns: 1fr;
+  }
+  .quality-top-bar-pair {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .quality-top-note {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 640px) {
@@ -731,6 +1035,35 @@ svg text {
   #dashboard-body { padding: 0; }
   #overview-cards { grid-template-columns: repeat(2, 1fr); }
   .step { grid-template-columns: 1fr; }
+  .quality-chart {
+    min-height: 620px;
+    padding: 14px;
+  }
+  .quality-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .quality-metric-select {
+    max-width: none;
+    width: min(220px, 70%);
+  }
+  .quality-summary-row,
+  .quality-kpi-row,
+  .quality-top-summary {
+    grid-template-columns: 1fr;
+  }
+  .quality-top-bar-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .quality-top-bars-note {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .quality-insight {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 /* Section 06 Influence Analysis Layout

@@ -6,7 +6,7 @@
     <title>Greek Brain Drain — Mapping 63,951 Scientists Worldwide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=quality-gap-10">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="js/countryLabels.js"></script>
@@ -133,13 +133,13 @@
     <section class="step" id="spread" data-step="1">
         <div class="step-text">
             <span class="chapter-number">01</span>
-            <h2>Global spread</h2>
-            <p>Greek scientists are not evenly distributed. They cluster in a few major research hubs. The map shows spatial distribution; the ranking reveals just how concentrated the top destinations are.</p>
+            <h2>从数量流动到<br>影响力流动</h2>
+            <p>地图已经说明希腊科学家分布在世界各地；真正的问题是，海外科学家是否也更集中在高影响力区间。这里按论文产出分组，比较同等产出下本土与海外科学家的中位影响力，避免散点重叠掩盖趋势。</p>
         </div>
-        <div class="step-chart" id="chart-scatter" data-chart-title="Papers vs Citations Scatter Plot">
+        <div class="step-chart quality-chart" id="chart-scatter" data-chart-title="产出与影响力散点图">
             <div class="chart-placeholder">
-                <strong>Impact scatter plot</strong>
-                <span>Papers published vs citations received. Each point is a scientist, colored by domestic (red) or overseas (blue).</span>
+                <strong>产出与影响力散点图</strong>
+                <span>每个点代表一位科学家，颜色区分本土与海外。</span>
             </div>
         </div>
     </section>
@@ -147,13 +147,13 @@
     <section class="step" id="impact" data-step="2">
         <div class="step-text">
             <span class="chapter-number">02</span>
-            <h2>Impact disparity</h2>
-            <p>Do overseas Greek scientists publish more, or are they cited more for the same output? This section compares citation distributions, h-index, and the long tail of impact.</p>
+            <h2>最优秀的人才<br>在哪里发挥影响力</h2>
+            <p>如果海外组不仅人数多，而且在学科排名、上四分位和顶尖人才占比上更突出，人才流失就不只是数量迁移，而是科学影响力和学术网络的外移。下方分布图默认展示学科内排名百分位，数值越低代表越靠前。</p>
         </div>
-        <div class="step-chart" id="chart-boxplot" data-chart-title="Citation Distribution">
+        <div class="step-chart quality-chart" id="chart-boxplot" data-chart-title="本土与海外质量分布">
             <div class="chart-placeholder">
-                <strong>Distribution comparison</strong>
-                <span>Box plot or ridge chart comparing citation distributions between domestic and overseas scientists, using log scale.</span>
+                <strong>质量分布对比</strong>
+                <span>小提琴图与箱线图展示本土/海外科学家的影响力分布。</span>
             </div>
         </div>
     </section>
@@ -282,12 +282,12 @@
 <script src="js/overviewCards.js"></script>
 <script src="js/map.js"></script>
 <script src="js/barChart.js"></script>
-<script src="js/scatterPlot.js"></script>
-<script src="js/boxPlot.js"></script>
+<script src="js/scatterPlot.js?v=quality-gap-10"></script>
+<script src="js/boxPlot.js?v=quality-gap-10"></script>
 <script src="js/treemap.js"></script>
 <script src="js/topTalent.js"></script>
 <script src="js/academicAge.js"></script>
 <script src="js/scrollytelling.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=quality-gap-10"></script>
 <script src="js/influence_chart.js"></script>
 </html>
