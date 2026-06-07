@@ -573,6 +573,426 @@ body {
   color: var(--text-subtle);
 }
 
+#chart-author-role {
+  min-height: 540px;
+  padding: 12px;
+}
+
+.author-method-card {
+  margin: 12px 0 14px;
+  padding: 12px 14px;
+  background: rgba(248, 251, 253, 0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.author-method-card p {
+  margin: 0 0 10px;
+}
+
+.author-formula {
+  display: grid;
+  gap: 8px;
+  padding: 9px 10px;
+  color: var(--navy);
+  background: var(--bg-white);
+  border: 1px solid #dbe5ef;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.author-formula-row {
+  padding-bottom: 7px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.author-formula-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.author-formula-row b {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.author-formula strong {
+  color: var(--blue);
+  font-size: 15px;
+}
+
+.author-role-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 500px;
+}
+
+.author-role-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.author-role-control {
+  display: grid;
+  gap: 4px;
+  min-width: 132px;
+}
+
+.author-role-control span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.author-role-control select {
+  height: 34px;
+  max-width: 230px;
+  padding: 0 34px 0 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text);
+  background:
+    linear-gradient(45deg, transparent 50%, var(--text-muted) 50%) calc(100% - 16px) 14px / 5px 5px no-repeat,
+    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%) calc(100% - 11px) 14px / 5px 5px no-repeat,
+    var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(16, 50, 92, 0.04);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+.author-role-control select:hover {
+  border-color: #b8c8d8;
+  background-color: #fbfdff;
+}
+
+.author-role-control select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(43, 111, 159, 0.14);
+}
+
+.author-role-hint {
+  margin-left: auto;
+  padding-bottom: 5px;
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+
+.author-role-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(250px, 0.85fr);
+  gap: 10px;
+  align-items: stretch;
+}
+
+.author-role-side {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  min-width: 0;
+  height: 100%;
+}
+
+.author-role-side-visuals {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  min-width: 0;
+}
+
+.author-role-chart-host,
+.author-role-distribution,
+.author-role-composition,
+.author-role-summary {
+  background: #f8fbfd;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.author-role-chart-host {
+  min-height: 420px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.author-role-chart-host svg,
+.author-role-distribution svg,
+.author-role-composition svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.author-role-summary {
+  padding: 10px;
+  min-height: 0;
+}
+
+.author-chart-title {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--navy);
+}
+
+.author-role-chart-host .author-chart-title {
+  font-size: 14px;
+}
+
+.author-role-side .author-chart-title {
+  font-size: 12px;
+}
+
+.author-x-grid .domain,
+.author-x-grid .tick line {
+  stroke: #dbe5ef;
+}
+
+.author-x-grid .tick text,
+.author-axis-text,
+.author-axis-label {
+  fill: var(--text-subtle);
+  font-size: 11px;
+}
+
+.author-x-grid .tick text {
+  font-size: 12px;
+}
+
+.author-role-side .author-axis-text {
+  font-size: 10px;
+}
+
+.author-role-row {
+  cursor: pointer;
+}
+
+.author-row-hit {
+  fill: transparent;
+  stroke: transparent;
+  rx: 0;
+}
+
+.author-role-row.all-fields .author-row-hit {
+  fill: rgba(31, 138, 138, 0.12);
+  stroke: transparent;
+}
+
+.author-role-row:hover .author-row-hit {
+  fill: rgba(43, 111, 159, 0.08);
+  stroke: transparent;
+}
+
+.author-role-row.all-fields:hover .author-row-hit,
+.author-role-row.all-fields.selected .author-row-hit {
+  fill: rgba(31, 138, 138, 0.18);
+  stroke: transparent;
+}
+
+.author-role-row.selected:not(.all-fields) .author-row-hit {
+  fill: rgba(43, 111, 159, 0.12);
+  stroke: transparent;
+}
+
+.author-role-row:hover .author-gap-line,
+.author-role-row.selected .author-gap-line {
+  stroke: var(--navy);
+  stroke-width: 2.5px;
+}
+
+.author-role-row.selected .author-point {
+  stroke: var(--navy);
+  stroke-width: 2px;
+}
+
+.author-gap-line {
+  stroke: #b8c5d3;
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+.author-field-label {
+  text-anchor: end;
+  fill: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  transition: fill 0.15s;
+}
+
+.author-role-row:hover .author-field-label,
+.author-role-row.selected .author-field-label {
+  fill: var(--navy);
+}
+
+.author-role-row.all-fields .author-field-label {
+  font-weight: 800;
+  fill: var(--navy);
+}
+
+.author-gap-label,
+.author-legend text,
+.author-dist-label {
+  fill: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.author-role-side .author-dist-label {
+  font-size: 10px;
+}
+
+.author-dist-label {
+  text-anchor: end;
+}
+
+.author-density {
+  opacity: 0.28;
+  stroke-width: 1.5px;
+}
+
+.author-density.domestic {
+  stroke: var(--red);
+}
+
+.author-density.overseas {
+  stroke: var(--blue);
+}
+
+.author-pyramid-bar {
+  opacity: 0.72;
+}
+
+.author-pyramid-bar.domestic {
+  fill: var(--red);
+}
+
+.author-pyramid-bar.overseas {
+  fill: var(--blue);
+}
+
+.author-pyramid-center {
+  stroke: var(--text-subtle);
+  stroke-width: 1px;
+}
+
+.author-pyramid-sides text {
+  fill: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.author-composition-slice {
+  opacity: 0.82;
+  stroke: #f8fbfd;
+  stroke-width: 2px;
+}
+
+.author-pie-label {
+  fill: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.author-pie-total-label {
+  fill: var(--text-subtle);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.author-pie-total {
+  fill: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.author-pie-legend-label {
+  fill: var(--text);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.author-pie-legend-count {
+  fill: var(--text-subtle);
+  font-size: 9px;
+}
+
+.author-median-line {
+  stroke: var(--navy);
+  stroke-width: 1.5px;
+  stroke-dasharray: 3,3;
+}
+
+.author-median-label {
+  fill: var(--navy);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.author-summary-kicker {
+  margin-bottom: 4px;
+  color: var(--text-subtle);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.author-role-summary h3 {
+  margin: 0 0 9px;
+  color: var(--navy);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.author-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 9px;
+}
+
+.author-summary-stat {
+  display: grid;
+  gap: 2px;
+  padding: 7px;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.author-summary-stat span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.author-summary-stat strong {
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.1;
+}
+
+.author-summary-reading {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.author-summary-reading {
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+}
+
 /* ─── Page navigation dots (slide indicator) ─── */
 
 #page-nav {
@@ -719,6 +1139,13 @@ svg text {
   }
   #map { min-height: 380px; }
   #barchart { min-height: 360px; }
+  .author-role-step,
+  .author-role-body {
+    grid-template-columns: 1fr;
+  }
+  .author-role-side-visuals {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -731,6 +1158,11 @@ svg text {
   #dashboard-body { padding: 0; }
   #overview-cards { grid-template-columns: repeat(2, 1fr); }
   .step { grid-template-columns: 1fr; }
+  .author-role-control,
+  .author-role-control select {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 /* Section 06 Influence Analysis Layout

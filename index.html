@@ -19,7 +19,7 @@
         <a href="#dashboard">Map</a>
         <a href="#spread">Quality</a>
         <a href="#fields">Fields</a>
-        <a href="#top-talent">Talent</a>
+        <a href="#author-role">作者主导性</a>
         <a href="#next-gen">Age</a>
         <a href="#influence-analysis">Influence</a>
     </div>
@@ -124,7 +124,7 @@
     <a href="#dashboard" class="pn-dot active"></a>
     <a href="#spread" class="pn-dot" data-label="Quality gap"></a>
     <a href="#fields" class="pn-dot" data-label="Fields"></a>
-    <a href="#top-talent" class="pn-dot" data-label="Top talent"></a>
+    <a href="#author-role" class="pn-dot" data-label="作者主导性"></a>
     <a href="#next-gen" class="pn-dot" data-label="Next gen"></a>
     <a href="#influence-analysis" class="pn-dot" data-label="Influence"></a>
 </nav>
@@ -189,20 +189,34 @@
         </div>
     </section>
 
-    <section class="step" id="top-talent" data-step="4">
+    <section class="step author-role-step" id="author-role" data-step="4">
         <div class="step-text">
             <span class="chapter-number">04</span>
-            <h2>Top talent migration</h2>
-            <p>If top 1% scientists are disproportionately overseas, brain drain is not just a quantity problem — it is a migration of scientific influence and knowledge networks.</p>
+            <h2>当主角，还是当配角？</h2>
+            <div class="author-method-card">
+                <p><strong>计算方式：</strong>作者主导性衡量科学家在科研合作中是否承担核心角色。这里使用三种占比来观察不同层次的主导性：</p>
+                <div class="author-formula">
+                    <div class="author-formula-row">
+                        <span><b>主导作者占比</b> <strong>=</strong> 单作者、第一作者或最后作者论文数 <strong>÷</strong> 该作者总论文数</span>
+                    </div>
+                    <div class="author-formula-row">
+                        <span><b>第一作者占比</b> <strong>=</strong> 单作者或第一作者论文数 <strong>÷</strong> 该作者总论文数</span>
+                    </div>
+                    <div class="author-formula-row">
+                        <span><b>单作者占比</b> <strong>=</strong> 单作者论文数 <strong>÷</strong> 该作者总论文数</span>
+                    </div>
+                </div>
+            </div>
+            <p><strong>关键发现：</strong>全部学科中，海外科学家的主导作者占比中位数为 51.7%，本土为 43.2%，海外高出 8.5%。但在 Top 10%、Top 5% 和 Top 1% 中，差距分别收窄到 2.4%、1.4% 和 -1.4%。这说明顶尖科学家之间的作者主导性差异并不明显，整体差距更多来自非顶尖层级：本土留存群体中，主导性较低的科学家占比更高。</p>
+            <p>分学科看，历史研究、公共卫生与健康服务、临床医学和社会科学的海外优势最明显。其中临床医学样本最大，最适合支撑“海外科学家更常处在关键作者位置”的判断。</p>
         </div>
-        <div class="step-chart" id="chart-top-talent" data-chart-title="Top Talent by Country">
+        <div class="step-chart" id="chart-author-role" data-chart-title="作者主导性交互分析">
             <div class="chart-placeholder">
-                <strong>Top percentile by country</strong>
-                <span>Compare top 1%, 5%, and 10% scientist distributions across countries.</span>
+                <strong>作者主导性交互分析</strong>
+                <span>比较不同学科和人才层级中，本土与海外科学家的关键作者位置差异。</span>
             </div>
         </div>
     </section>
-
     <section class="step" id="next-gen" data-step="5">
         <div class="step-text">
             <span class="chapter-number">05</span>
@@ -284,6 +298,7 @@
 <script src="js/barChart.js"></script>
 <script src="js/scatterPlot.js"></script>
 <script src="js/boxPlot.js"></script>
+<script src="js/authorRole.js"></script>
 <script src="js/treemap.js"></script>
 <script src="js/topTalent.js"></script>
 <script src="js/academicAge.js"></script>

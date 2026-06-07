@@ -70,11 +70,12 @@ function getFilteredByCountry(allData, state) {
 }
 
 async function loadAllData() {
-    const [byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll, scatterSample, influenceAll] = await Promise.all([
+    const [byCountry, top10, byField, diasporaComp, authorRole, topTalent, academicAge, overview, byCountryAll, scatterSample, influenceAll] = await Promise.all([
         loadJson('by_country.json'),
         loadJson('top10_countries.json'),
         loadJson('by_field.json'),
         loadJson('diaspora_comparison.json'),
+        loadJson('author_role.json', {}),
         loadJson('top_talent_by_country.json'),
         loadJson('academic_age.json'),
         loadJson('overview_stats.json', {}),
@@ -84,7 +85,7 @@ async function loadAllData() {
         fetch('web/data/influence_all_countries.json').then(r => r.json()).catch(() => null)
     ]);
     window.__overviewStats = overview;
-    return { byCountry, top10, byField, diasporaComp, topTalent, academicAge, overview, byCountryAll, scatterSample, influenceAll };
+    return { byCountry, top10, byField, diasporaComp, authorRole, topTalent, academicAge, overview, byCountryAll, scatterSample, influenceAll };
 }
 
 async function init() {
@@ -138,7 +139,7 @@ async function init() {
         }
     });
     onStepEnter(4, () => {
-        if (data.topTalent.length) renderTopTalent(data.topTalent);
+        if (data.authorRole && data.authorRole.rows) renderAuthorRole(data.authorRole);
     });
     onStepEnter(5, () => {
         if (data.academicAge.length) renderAcademicAge(data.academicAge);
@@ -147,6 +148,10 @@ async function init() {
     onStepEnter(6, () => {
         if (data.influenceAll) renderInfluenceCharts(data.influenceAll);
     });
+
+    if (window.location.hash === '#author-role' && data.authorRole && data.authorRole.rows) {
+        renderAuthorRole(data.authorRole);
+    }
 
     initScrollytelling();
 }
