@@ -3,291 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greek Brain Drain — Mapping 63,951 Scientists Worldwide</title>
+    <title>Greek Brain Drain — Section 7 Portfolio Structure</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
-    <script src="js/countryLabels.js"></script>
 </head>
 <body>
 
 <nav id="top-nav">
-    <a class="logo-text" href="#">Greek Brain Drain</a>
+    <a class="logo-text" href="#portfolio-structure">Greek Brain Drain</a>
     <div class="nav-links">
-        <a href="#dashboard">Map</a>
-        <a href="#spread">Quality</a>
-        <a href="#fields">Fields</a>
-        <a href="#top-talent">Talent</a>
-        <a href="#next-gen">Age</a>
-        <a href="#influence-analysis">Influence</a>
+        <a href="#portfolio-structure">Portfolio</a>
     </div>
-</nav>
-
-<div id="dashboard">
-    <div id="filter-bar">
-        <div class="filter-group">
-            <label>Field</label>
-            <div class="custom-select" id="filter-field-wrap">
-                <button class="cs-trigger" data-target="filter-field">
-                    <span class="cs-value">All fields</span>
-                    <span class="cs-arrow"></span>
-                </button>
-                <ul class="cs-menu" id="field-menu">
-                    <li data-value="all" class="cs-option selected">All fields</li>
-                </ul>
-            </div>
-        </div>
-        <div class="filter-group">
-            <label>Percentile</label>
-            <div class="custom-select" id="filter-percentile-wrap">
-                <button class="cs-trigger" data-target="filter-percentile">
-                    <span class="cs-value">All scientists</span>
-                    <span class="cs-arrow"></span>
-                </button>
-                <ul class="cs-menu" id="percentile-menu">
-                    <li data-value="all" class="cs-option selected">All scientists</li>
-                    <li data-value="top_1" class="cs-option">Top 1%</li>
-                    <li data-value="top_5" class="cs-option">Top 5%</li>
-                    <li data-value="top_10" class="cs-option">Top 10%</li>
-                </ul>
-            </div>
-        </div>
-        <button id="filter-reset" type="button">Reset</button>
-    </div>
-
-    <div id="dashboard-body">
-        <aside id="cards-column">
-            <div id="country-panel">
-                <div id="country-map"></div>
-                <div id="country-info">
-                    <span id="selected-country-name">Greece</span>
-                    <span id="selected-country-sub">Home country</span>
-                </div>
-            </div>
-            <div id="overview-cards">
-                <article class="card">
-                    <span class="card-label">Scientists</span>
-                    <span class="card-number" id="card-total">--</span>
-                    <span class="card-sub" id="card-total-sub">total</span>
-                </article>
-                <article class="card">
-                    <span class="card-label">Global share</span>
-                    <span class="card-number" id="card-share">--</span>
-                    <span class="card-sub" id="card-share-sub">of all Greek scientists</span>
-                </article>
-                <article class="card">
-                    <span class="card-label">Top 1%</span>
-                    <span class="card-number" id="card-top1">--</span>
-                    <span class="card-sub" id="card-top1-sub">scientists</span>
-                </article>
-                <article class="card">
-                    <span class="card-label">Median citations</span>
-                    <span class="card-number" id="card-median-citation">--</span>
-                    <span class="card-sub">per scientist</span>
-                </article>
-                <article class="card">
-                    <span class="card-label">Median h-index</span>
-                    <span class="card-number" id="card-median-h">--</span>
-                    <span class="card-sub">per scientist</span>
-                </article>
-                <article class="card">
-                    <span class="card-label">Top field</span>
-                    <span class="card-number card-number-sm" id="card-top-field">--</span>
-                    <span class="card-sub">most common</span>
-                </article>
-            </div>
-        </aside>
-
-        <section id="map-column">
-            <div class="panel-heading">
-                <h2>Greek scientists around the world</h2>
-            </div>
-            <div id="map"></div>
-            <div id="scroll-prompt">
-                <span>Scroll to explore the data story</span>
-                <span class="scroll-arrow">↓</span>
-            </div>
-        </section>
-
-        <aside id="barchart-column">
-            <div class="panel-heading">
-                <h2>Top 10 countries</h2>
-            </div>
-            <div id="barchart"></div>
-        </aside>
-    </div>
-</div>
-
-<nav id="page-nav">
-    <a href="#dashboard" class="pn-dot active"></a>
-    <a href="#spread" class="pn-dot" data-label="Quality gap"></a>
-    <a href="#fields" class="pn-dot" data-label="Fields"></a>
-    <a href="#top-talent" class="pn-dot" data-label="Top talent"></a>
-    <a href="#next-gen" class="pn-dot" data-label="Next gen"></a>
-    <a href="#influence-analysis" class="pn-dot" data-label="Influence"></a>
 </nav>
 
 <article id="story">
-    <section class="step" id="spread" data-step="1">
-        <div class="step-text">
-            <span class="chapter-number">01</span>
-            <h2>Global spread</h2>
-            <p>Greek scientists are not evenly distributed. They cluster in a few major research hubs. The map shows spatial distribution; the ranking reveals just how concentrated the top destinations are.</p>
-        </div>
-        <div class="step-chart" id="chart-scatter" data-chart-title="Papers vs Citations Scatter Plot">
-            <div class="chart-placeholder">
-                <strong>Impact scatter plot</strong>
-                <span>Papers published vs citations received. Each point is a scientist, colored by domestic (red) or overseas (blue).</span>
-            </div>
-        </div>
-    </section>
+    <section class="step section6-step" id="portfolio-structure" data-step="7">
+        <div class="step-text section6-story-text">
+            <span class="chapter-number">07</span>
 
-    <section class="step" id="impact" data-step="2">
-        <div class="step-text">
-            <span class="chapter-number">02</span>
-            <h2>Impact disparity</h2>
-            <p>Do overseas Greek scientists publish more, or are they cited more for the same output? This section compares citation distributions, h-index, and the long tail of impact.</p>
-        </div>
-        <div class="step-chart" id="chart-boxplot" data-chart-title="Citation Distribution">
-            <div class="chart-placeholder">
-                <strong>Distribution comparison</strong>
-                <span>Box plot or ridge chart comparing citation distributions between domestic and overseas scientists, using log scale.</span>
-            </div>
-        </div>
-    </section>
+            <h2 id="section6-left-title">希腊科学家的全球承接结构</h2>
 
-    <section class="step" id="fields" data-step="3">
-        <div class="step-text">
-            <span class="chapter-number">03</span>
-            <h2>学科间的<br>不对称流失</h2>
-            <p>
-                人才流失在不同学科中的程度差异显著。
+            <p id="section6-left-subtitle">
+                海外影响力并不是随机分散的，而是被不同国家和学科体系有结构地承接。
             </p>
-            <p>
-                <strong>心理与认知科学</strong>（75%）、
-                <strong>哲学与神学</strong>（75%）的海外科学家比例高达四分之三，
-                而<strong>农业与渔业</strong>（24%）、
-                <strong>生物学</strong>（28%）则有超过七成的科学家留在希腊本土。
-            </p>
-            <p>
-                规模最大的<strong>临床医学</strong>（22,204 人）海外占比仅 38%，
-                但同属医学领域的<strong>公共卫生</strong>海外占比却高达 58%——
-                两者相差 20 个百分点。这一反差说明，
-                人才流失的强度与研究岗位在本国的供给直接相关。
-            </p>
-            <p>
-                点击任意方块，可查看该学科内部各子领域的本土与海外人数对比。
-            </p>
-        </div>
-        <div class="step-chart" id="chart-treemap" data-chart-title="Field Treemap">
-            <div class="chart-placeholder">
-                <strong>Field treemap / heatmap</strong>
-                <span>Area = scientist count. Color = overseas share. Hover for domestic, overseas, and top 1% breakdowns.</span>
-            </div>
-        </div>
-    </section>
 
-    <section class="step" id="top-talent" data-step="4">
-        <div class="step-text">
-            <span class="chapter-number">04</span>
-            <h2>Top talent migration</h2>
-            <p>If top 1% scientists are disproportionately overseas, brain drain is not just a quantity problem — it is a migration of scientific influence and knowledge networks.</p>
-        </div>
-        <div class="step-chart" id="chart-top-talent" data-chart-title="Top Talent by Country">
-            <div class="chart-placeholder">
-                <strong>Top percentile by country</strong>
-                <span>Compare top 1%, 5%, and 10% scientist distributions across countries.</span>
-            </div>
-        </div>
-    </section>
+            <div id="section6-left-body" class="section6-copy-body"></div>
 
-    <section class="step" id="next-gen" data-step="5">
-        <div class="step-text">
-            <span class="chapter-number">05</span>
-            <h2>年龄与学术生涯分析</h2>
-            <p>学术年龄（论文发表时间跨度）是衡量科学家成熟度的重要指标。<strong>计算方式：学术年龄 = 最后一篇论文发表年份 - 第一篇论文发表年份</strong>。通过比较不同学术年龄段的国内外分布，我们可以发现人才流动的规律。</p>
-            <p style="margin-top: 12px; font-size: 14px; color: var(--text-muted);">
-                <strong>数据洞察：</strong>从分组视图可见，学术年龄在 <strong>0-5岁</strong> 阶段，海外科学家占比最高（51.88%），这表明刚进入学术界的年轻研究者更倾向于选择海外发展。随着学术年龄增长，本土科学家数量反超海外。
-            </p>
-            <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
-                <strong>关键发现：</strong>学术年龄 <strong>36岁以上</strong> 的资深科学家中，海外占比再次回升至44.08%，反映出高学术成就者更容易获得海外顶尖机构的青睐，形成<strong>"年轻外流、中年回流、资深再外流"</strong>的模式。
-            </p>
-        </div>
-        <div class="step-chart" id="chart-age" data-chart-title="Academic Age Distribution">
-            <div class="chart-controls">
-                <button id="view-grouped" class="view-btn active">分组视图</button>
-                <button id="view-detailed" class="view-btn">详细视图</button>
-                <div class="range-controls" id="range-controls" style="display:none;">
-                    <span>年龄范围:</span>
-                    <input type="number" id="age-start" value="0" min="0" max="60" placeholder="起始">
-                    <span>至</span>
-                    <input type="number" id="age-end" value="60" min="0" max="60" placeholder="结束">
-                    <button id="apply-range">应用</button>
-                </div>
+            <div class="section6-reading-box">
+                <div class="section6-reading-title" id="section6-reading-title">如何阅读这张图</div>
+                <ul id="section6-left-reading"></ul>
             </div>
-            <div class="chart-placeholder" style="display:none;"></div>
-        </div>
-    </section>
 
-    <section class="step" id="influence-analysis" data-step="6">
-        <!-- 左侧保持不动 -->
-        <div class="step-text">
-            <span class="chapter-number">06</span>
-            <h2>追求卓越：流失的初始动力</h2>
-            <p>希腊科学家的流失，究竟只是人口意义上的迁徙，还是一种对更高学术成就的主动选择？通过比较不同国家希腊科学家的影响力表现、个体成长上限与顶尖人才结构，我们发现：<strong>人才流失并非随机发生，而呈现出明显的“卓越选择”特征。</strong>越接近学术金字塔顶端的研究者，越倾向于流向拥有更优资源、更强网络与更高回报的科研中心。</p>
-            <p style="margin-top: 12px; font-size: 13px; color: var(--text-subtle);">
-                💡 <strong>多维探索：</strong>我们绘制了三种不同视角的图表，可以从宏观规模与质量博弈、整体分布结构、以及核心大国的金字塔顶端精英比例全方位进行比对。
-            </p>
-        </div>
-        
-        <!-- 右侧容器：调整内部的 Flex 属性与元素的上下物理顺序 -->
-        <div class="step-chart" id="chart-influence-analysis" data-chart-title="Influence Analysis by Country">
-            
-            <!-- 1. 切换 Tab 依然在最上方 -->
-            <div class="influence-tabs" style="margin-bottom: 15px; display: flex; gap: 8px;">
-                <button class="inf-tab-btn active" data-target="influence-scatter-plot">📊 规模 vs 质量</button>
-                <button class="inf-tab-btn" data-target="influence-box-plot">📈 影响力分布</button>
-                <button class="inf-tab-btn" data-target="influence-stacked-bar">📐 顶尖精英占比</button>
+            <p id="section6-left-connection" class="section6-connection"></p>
+
+            <div class="section6-copy-pager" id="section6-copy-pager" aria-label="Section 7 text pagination">
+                <button type="button" id="section6-copy-prev">上一段</button>
+                <span id="section6-copy-page-label">1 / 2</span>
+                <button type="button" id="section6-copy-next">下一段</button>
             </div>
-        
-            <div class="influence-layout-wrapper">
-                <!-- 解读放前面 -->
-                <div class="influence-text-insight">
-                    <h4 id="inf-insight-title"></h4>
-                    <p id="inf-insight-body"></p>
+        </div>
+
+        <div class="step-chart section6-chart" id="chart-portfolio-structure" data-chart-title="Country × Field Portfolio">
+            <div class="section6-tabs" role="tablist" aria-label="Section 7 chart views">
+                <button class="section6-tab active" type="button" data-section6-tab="map" aria-selected="true">01 空间扩散</button>
+                <button class="section6-tab" type="button" data-section6-tab="matrix" aria-selected="false">02 学科组合</button>
+                <button class="section6-tab" type="button" data-section6-tab="role" aria-selected="false">03 国家角色</button>
+            </div>
+
+            <div class="section6-panel active" data-section6-panel="map">
+                <div class="map-controls">
+                    <label>
+                        学科筛选：
+                        <select id="flow-field-select">
+                            <option value="__all__">全部学科</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Top N 国家：
+                        <input id="flow-topn" type="range" min="5" max="25" step="1" value="12">
+                        <span id="flow-topn-value">12</span>
+                    </label>
+
+                    <label>
+                        最小人数：
+                        <input id="flow-min-count" type="range" min="1" max="50" step="1" value="10">
+                        <span id="flow-min-count-value">10</span>
+                    </label>
+
+                    <div class="map-button-row">
+                        <button id="flow-zoom-in">放大 +</button>
+                        <button id="flow-zoom-out">缩小 −</button>
+                        <button id="flow-zoom-reset">重置地图</button>
+                        <button id="flow-reset">重置筛选</button>
+                    </div>
                 </div>
 
-                <!-- 图表放后面 -->
-                <div class="influence-charts-container">
-                    <div id="influence-scatter-plot" class="influence-chart-view"></div>
-                    <div id="influence-box-plot" class="influence-chart-view" style="display:none;"></div>
-                    <div id="influence-stacked-bar" class="influence-chart-view" style="display:none;"></div>
+                <div class="flow-layout">
+                    <div id="flow-map"></div>
+
+                    <div class="flow-side-panel">
+                        <div class="side-card">
+                            <div class="side-card-title">图例</div>
+                            <div id="flow-legend-panel"></div>
+                        </div>
+
+                        <div class="side-card">
+                            <div class="side-card-title">欧洲局部地图</div>
+                            <div id="europe-network"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section6-panel" data-section6-panel="matrix">
+                <div id="heatmap"></div>
+                <div id="heatmap-legend-row" class="bottom-legend-row"></div>
+            </div>
+
+            <div class="section6-panel" data-section6-panel="role">
+                <div class="controls">
+                    <label>
+                        聚焦国家：
+                        <select id="country-focus-select">
+                            <option value="">全部国家</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" id="toggle-labels" checked>
+                        显示重点国家标签
+                    </label>
+
+                    <button id="reset-country-focus">重置高亮</button>
                 </div>
 
+                <div class="view-layout">
+                    <div id="diversity"></div>
+                </div>
+
+                <div class="role-bottom-area">
+                    <div id="diversity-legend-row" class="bottom-legend-row"></div>
+
+                    <div id="portfolio-card">
+                        <div class="card-title">国家画像</div>
+                        <p>将鼠标悬停在国家点上，或从下拉菜单选择国家，这里会显示该国的学科组合、主导学科和专业化学科。</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 </article>
 
-<footer>
-    <p>Data: <em>Comprehensive mapping of local and diaspora scientists: A database and analysis of 63,951 Greek scientists</em></p>
-    <p>Data Visualization course project</p>
-</footer>
-
 <div class="tooltip" id="tooltip" style="opacity:0;"></div>
 
-<script src="js/filters.js"></script>
-<script src="js/overviewCards.js"></script>
-<script src="js/map.js"></script>
-<script src="js/barChart.js"></script>
-<script src="js/scatterPlot.js"></script>
-<script src="js/boxPlot.js"></script>
-<script src="js/treemap.js"></script>
-<script src="js/topTalent.js"></script>
-<script src="js/academicAge.js"></script>
-<script src="js/scrollytelling.js"></script>
-<script src="js/main.js"></script>
-<script src="js/influence_chart.js"></script>
+<script src="js/section6_portfolio.js?v=section7_text_metrics_explained_001"></script>
+</body>
 </html>

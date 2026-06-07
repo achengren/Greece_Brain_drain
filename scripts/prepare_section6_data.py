@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -9,34 +10,99 @@ import pandas as pd
 # Settings
 # =========================
 
-RAW_PATH = Path("data/scientists_raw.csv")
+RAW_CANDIDATES = [
+    Path("data/scientists_raw.csv"),
+    Path("data/raw/scientists_raw.csv"),
+    Path("data/raw/scientists.csv"),
+    Path("data/scientists.csv")
+]
+
 OUT_DIR = Path("data/processed")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 MIN_COUNTRY_TOTAL = 50
 MIN_CELL_N = 10
 
-TOP_COUNTRIES = 12
-TOP_FIELDS = 15
+TOP_OVERSEAS_COUNTRIES = 9
+TOP_FIELDS = 10
+
+
+# =========================
+# Helper functions
+# =========================
+
+def find_raw_path():
+    for path in RAW_CANDIDATES:
+        if path.exists():
+            return path
+    raise FileNotFoundError(
+        "Cannot find raw data file. Tried: "
+        + ", ".join(str(p) for p in RAW_CANDIDATES)
+    )
+
+
+def normalize_country_code(value):
+    if pd.isna(value):
+        return np.nan
+
+    v = str(value).strip().lower()
+
+    greece_variants = {
+        "grc",
+        "greece",
+        "greek",
+        "hellas",
+        "ellada",
+        "ελλάδα",
+        "ελλαδα"
+    }
+
+    if v in greece_variants:
+        return "grc"
+
+    return v
 
 
 # =========================
 # Load raw data
 # =========================
 
+RAW_PATH = find_raw_path()
+print("Running script:", Path(__file__).resolve())
+print("Raw data path:", RAW_PATH)
+
 df = pd.read_csv(RAW_PATH, low_memory=False)
 
-# Keep rows with both country and field information
+required_cols = ["cntry", "sm-field"]
+missing_cols = [col for col in required_cols if col not in df.columns]
+
+if missing_cols:
+    raise ValueError(f"Missing required columns in raw data: {missing_cols}")
+
 df = df.dropna(subset=["cntry", "sm-field"]).copy()
 
-# Clean country and field strings
-df["cntry"] = df["cntry"].astype(str).str.strip().str.lower()
+df["cntry_original"] = df["cntry"]
+df["cntry"] = df["cntry"].apply(normalize_country_code)
 df["sm-field"] = df["sm-field"].astype(str).str.strip()
 
-# This section focuses on diaspora destinations, so exclude Greece
-diaspora = df[df["cntry"] != "grc"].copy()
+analysis_df = df.copy()
 
-print(f"Total diaspora scientists with country and field: {len(diaspora):,}")
+print(f"Total scientists with valid country and field: {len(analysis_df):,}")
+
+country_counts_debug = analysis_df["cntry"].value_counts()
+
+print("\nTop country codes after normalization:")
+print(country_counts_debug.head(20))
+
+if "grc" not in country_counts_debug.index:
+    print("\nOriginal cntry values sample:")
+    print(df["cntry_original"].value_counts().head(30))
+    raise ValueError(
+        "No Greece record detected after normalization. "
+        "Check the raw cntry coding in your CSV."
+    )
+
+print(f"\nGreece / grc count after normalization: {country_counts_debug['grc']:,}")
 
 
 # =========================
@@ -44,20 +110,26 @@ print(f"Total diaspora scientists with country and field: {len(diaspora):,}")
 # =========================
 
 country_totals_all = (
-    diaspora.groupby("cntry")
+    analysis_df.groupby("cntry")
     .size()
     .reset_index(name="country_total")
     .sort_values("country_total", ascending=False)
 )
 
-eligible_countries = country_totals_all[
-    country_totals_all["country_total"] >= MIN_COUNTRY_TOTAL
-]["cntry"].tolist()
+overseas_country_totals = country_totals_all[
+    country_totals_all["cntry"] != "grc"
+].copy()
 
-top_countries = country_totals_all.head(TOP_COUNTRIES)["cntry"].tolist()
+top_overseas_countries = (
+    overseas_country_totals
+    .head(TOP_OVERSEAS_COUNTRIES)["cntry"]
+    .tolist()
+)
+
+top_countries = ["grc"] + top_overseas_countries
 
 field_totals_all = (
-    diaspora.groupby("sm-field")
+    analysis_df.groupby("sm-field")
     .size()
     .reset_index(name="field_total")
     .sort_values("field_total", ascending=False)
@@ -65,7 +137,13 @@ field_totals_all = (
 
 top_fields = field_totals_all.head(TOP_FIELDS)["sm-field"].tolist()
 
-overall_total = len(diaspora)
+overall_total = len(analysis_df)
+
+print("\nMain countries for Section 6:")
+print(top_countries)
+
+print("\nMain fields for Section 6:")
+print(top_fields)
 
 
 # =========================
@@ -73,19 +151,19 @@ overall_total = len(diaspora)
 # =========================
 
 country_field = (
-    diaspora.groupby(["cntry", "sm-field"])
+    analysis_df.groupby(["cntry", "sm-field"])
     .size()
     .reset_index(name="n")
 )
 
 country_totals = (
-    diaspora.groupby("cntry")
+    analysis_df.groupby("cntry")
     .size()
     .reset_index(name="country_total")
 )
 
 field_totals = (
-    diaspora.groupby("sm-field")
+    analysis_df.groupby("sm-field")
     .size()
     .reset_index(name="field_total")
 )
@@ -97,18 +175,30 @@ spec = (
 )
 
 spec["overall_total"] = overall_total
+
+# Formula 1:
+# share_in_country = n(country, field) / total scientists in that country
 spec["share_in_country"] = spec["n"] / spec["country_total"]
+
+# Formula 2:
+# share_overall = total scientists in that field / total scientists in all countries
 spec["share_overall"] = spec["field_total"] / spec["overall_total"]
+
+# Formula 3:
+# Specialization Index:
+# SI = share_in_country / share_overall
 spec["specialization_index"] = spec["share_in_country"] / spec["share_overall"]
 
-# log2 specialization index
+# Formula 4:
+# Color value:
+# log2(SI)
 spec["log2_si"] = np.log2(spec["specialization_index"])
 
-# Reliability flag: avoid over-interpreting tiny cells
+# Small-sample reliability flag
 spec["reliable"] = spec["n"] >= MIN_CELL_N
 
-# Clip color range for visualization stability
-spec["log2_si_clipped"] = spec["log2_si"].clip(-2, 2)
+# Clip color range for stable visualization
+spec["log2_si_clipped"] = spec["log2_si"].clip(-1.5, 1.5)
 
 # Main view flag
 spec["in_main_view"] = (
@@ -116,24 +206,29 @@ spec["in_main_view"] = (
     & spec["sm-field"].isin(top_fields)
 )
 
-# Sort for readable output
 spec = spec.sort_values(["cntry", "sm-field"]).reset_index(drop=True)
 
-specialization_records = spec.to_dict(orient="records")
+if not (spec["cntry"] == "grc").any():
+    raise ValueError("After aggregation, specialization data still does not contain grc.")
+
+print(f"\nRows in specialization data: {len(spec):,}")
+print(f"Rows for Greece / grc in specialization data: {(spec['cntry'] == 'grc').sum():,}")
 
 with open(OUT_DIR / "country_field_specialization.json", "w", encoding="utf-8") as f:
-    json.dump(specialization_records, f, ensure_ascii=False, indent=2)
+    json.dump(spec.to_dict(orient="records"), f, ensure_ascii=False, indent=2)
 
 print(f"Saved: {OUT_DIR / 'country_field_specialization.json'}")
-print(f"Rows: {len(specialization_records):,}")
 
 
 # =========================
 # Field diversity by country
 # =========================
 
-# Only compute diversity for countries with enough scientists
-div_base = diaspora[diaspora["cntry"].isin(eligible_countries)].copy()
+eligible_countries = country_totals_all[
+    country_totals_all["country_total"] >= MIN_COUNTRY_TOTAL
+]["cntry"].tolist()
+
+div_base = analysis_df[analysis_df["cntry"].isin(eligible_countries)].copy()
 
 div_counts = (
     div_base.groupby(["cntry", "sm-field"])
@@ -148,19 +243,22 @@ div_country_totals = (
 )
 
 div_counts = div_counts.merge(div_country_totals, on="cntry", how="left")
+
+# p_field = n(country, field) / total scientists in that country
 div_counts["share"] = div_counts["n"] / div_counts["total"]
 
-# Simpson diversity: 1 - sum(p^2)
+# Field Diversity Index:
+# diversity = 1 - sum(p_field^2)
 diversity = (
     div_counts.groupby("cntry")
-    .apply(lambda g: 1 - np.sum(g["share"] ** 2), include_groups=False)
+    .apply(lambda g: 1 - np.sum(g["share"] ** 2))
     .reset_index(name="field_diversity")
 )
 
 diversity = diversity.merge(div_country_totals, on="cntry", how="left")
 
-# Top 3 fields for each country
 top_fields_by_country = {}
+
 for country, g in div_counts.groupby("cntry"):
     top3 = (
         g.sort_values("n", ascending=False)
@@ -172,7 +270,7 @@ for country, g in div_counts.groupby("cntry"):
 
 diversity["top_fields"] = diversity["cntry"].map(top_fields_by_country)
 
-# Rough label for interpretation
+
 def classify_country(row):
     if row["total"] >= 500 and row["field_diversity"] >= 0.80:
         return "large_generalist_hub"
@@ -183,17 +281,16 @@ def classify_country(row):
     else:
         return "small_specialized_node"
 
+
 diversity["portfolio_type"] = diversity.apply(classify_country, axis=1)
 
 diversity = diversity.sort_values("total", ascending=False).reset_index(drop=True)
 
-diversity_records = diversity.to_dict(orient="records")
-
 with open(OUT_DIR / "country_field_diversity.json", "w", encoding="utf-8") as f:
-    json.dump(diversity_records, f, ensure_ascii=False, indent=2)
+    json.dump(diversity.to_dict(orient="records"), f, ensure_ascii=False, indent=2)
 
 print(f"Saved: {OUT_DIR / 'country_field_diversity.json'}")
-print(f"Rows: {len(diversity_records):,}")
+print(f"Rows in diversity data: {len(diversity):,}")
 
 
 # =========================
@@ -201,17 +298,28 @@ print(f"Rows: {len(diversity_records):,}")
 # =========================
 
 metadata = {
-    "description": "Section 6 country-field portfolio analysis",
-    "diaspora_definition": "cntry != 'grc'",
+    "generated_at": datetime.now().isoformat(timespec="seconds"),
+    "description": "Section 6 country-field portfolio analysis, including Greece as domestic reference",
+    "analysis_scope": "All scientists with valid country and field information",
+    "greece_included": True,
+    "domestic_reference_country": "grc",
+    "specialization_formula": "SI = (n_country_field / n_country_total) / (n_field_total / n_overall_total)",
+    "color_formula": "color = log2(SI), clipped to [-1.5, 1.5]",
+    "diversity_formula": "Field Diversity Index = 1 - sum(p_field^2)",
     "min_country_total": MIN_COUNTRY_TOTAL,
     "min_cell_n": MIN_CELL_N,
     "top_countries": top_countries,
     "top_fields": top_fields,
-    "overall_diaspora_total": int(overall_total),
+    "total_scientists_included": int(overall_total),
+    "greece_count": int(country_counts_debug["grc"])
 }
 
 with open(OUT_DIR / "country_field_portfolio_metadata.json", "w", encoding="utf-8") as f:
     json.dump(metadata, f, ensure_ascii=False, indent=2)
 
 print(f"Saved: {OUT_DIR / 'country_field_portfolio_metadata.json'}")
-print("Done.")
+
+print("\nMetadata top_countries written:")
+print(metadata["top_countries"])
+
+print("\nDone.")

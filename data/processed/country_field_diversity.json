@@ -1,5 +1,28 @@
 [
   {
+    "cntry": "grc",
+    "field_diversity": 0.8018819241120572,
+    "total": 33956,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 13756,
+        "share": 0.4051124985275062
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 3786,
+        "share": 0.11149723171162682
+      },
+      {
+        "field": "Engineering",
+        "n": 2303,
+        "share": 0.0678230651431264
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
     "cntry": "usa",
     "field_diversity": 0.8317309956534988,
     "total": 8339,
