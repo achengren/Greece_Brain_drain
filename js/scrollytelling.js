@@ -13,9 +13,10 @@ function initScrollytelling() {
     ].filter(Boolean);
 
     const dots = document.querySelectorAll('.pn-dot');
+    const navLinks = document.querySelectorAll('.nav-links a');
     let activeSection = 'dashboard';
 
-    // 用 IntersectionObserver 追踪当前可见的 section → 更新导航点
+    // 用 IntersectionObserver 追踪当前可见的 section → 更新导航点 & 顶栏
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -25,6 +26,10 @@ function initScrollytelling() {
                     dots.forEach(d => {
                         const isActive = d.getAttribute('href') === '#' + id;
                         d.classList.toggle('active', isActive);
+                    });
+                    navLinks.forEach(a => {
+                        const isActive = a.getAttribute('href') === '#' + id;
+                        a.classList.toggle('active', isActive);
                     });
                 }
             }

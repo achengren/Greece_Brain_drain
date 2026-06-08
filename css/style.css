@@ -66,23 +66,34 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 4px;
+  gap: 0;
+  height: 100%;
 }
 
 .nav-links a {
-  padding: 6px 12px;
-  color: rgba(255,255,255,0.78);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 18px;
+  color: rgba(255,255,255,0.72);
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  border-radius: 999px;
+  border-radius: 0;
+  border-bottom: 3px solid transparent;
   outline: none;
-  transition: background 0.15s, color 0.15s;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
 
 .nav-links a:hover {
   color: #ffffff;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-links a.active {
+  color: #ffffff;
+  background: rgba(255,255,255,0.10);
+  border-bottom-color: #ffffff;
 }
 
 /* ─── Dashboard (fits viewport) ─── */
@@ -186,7 +197,7 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
+  transition: opacity 0.15s ease;
   opacity: 0;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
@@ -1329,18 +1340,59 @@ body {
 /* ─── Footer ─── */
 
 footer {
+  margin-top: 80px;
+  padding: 48px 24px 40px;
+  color: var(--text-subtle);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-white);
+}
+
+footer .footer-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 64px);
-  padding: 32px 24px 40px;
-  color: var(--text-subtle);
-  text-align: center;
-  font-size: 12px;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 footer p { margin: 3px 0; }
+
+.footer-section {
+  max-width: 720px;
+  text-align: left;
+}
+
+.footer-section h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.footer-section .citation {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.footer-section .citation a {
+  color: var(--blue);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.footer-section .citation a:hover {
+  text-decoration: underline;
+}
+
+.footer-note {
+  color: var(--text-subtle);
+  font-size: 12px;
+}
 
 /* ─── D3 chart overrides ─── */
 
@@ -1456,8 +1508,8 @@ svg text {
 }
 
 @media (max-width: 640px) {
-  #top-nav { padding: 0 14px; }
-  .nav-links a { padding: 4px 8px; font-size: 12px; }
+  #top-nav { padding: 0 8px; }
+  .nav-links a { padding: 0 10px; font-size: 11px; }
   #filter-bar {
     flex-wrap: wrap;
     padding: 10px 14px;
@@ -1670,8 +1722,9 @@ svg text {
   width: min(1200px, calc(100% - 48px));
   grid-template-columns: minmax(280px, 0.55fr) minmax(0, 1fr);
   gap: 40px;
-  padding-top: 96px;
+  padding-top: 24px;
   padding-bottom: 56px;
+  align-items: start;
 }
 
 .section6-story-text {
