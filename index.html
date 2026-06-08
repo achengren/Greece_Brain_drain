@@ -23,6 +23,7 @@
         <a href="#next-gen">Age</a>
         <a href="#author-role">Authorship</a>
         <a href="#influence-analysis">Influence</a>
+        <a href="#portfolio-structure">Portfolio</a>
     </div>
 </nav>
 
@@ -129,6 +130,7 @@
     <a href="#next-gen" class="pn-dot" data-label="Next gen"></a>
     <a href="#author-role" class="pn-dot" data-label="Authorship"></a>
     <a href="#influence-analysis" class="pn-dot" data-label="Influence"></a>
+    <a href="#portfolio-structure" class="pn-dot" data-label="Portfolio"></a>
 </nav>
 
 <article id="story">
@@ -288,6 +290,123 @@
             </div>
         </div>
     </section>
+
+    <section class="step section6-step" id="portfolio-structure" data-step="7">
+        <div class="step-text section6-story-text">
+            <span class="chapter-number">07</span>
+
+            <h2 id="section6-left-title">希腊科学家的全球承接结构</h2>
+
+            <p id="section6-left-subtitle">
+                海外影响力并不是随机分散的，而是被不同国家和学科体系有结构地承接。
+            </p>
+
+            <div id="section6-left-body" class="section6-copy-body"></div>
+
+            <div class="section6-reading-box">
+                <div class="section6-reading-title" id="section6-reading-title">如何阅读这张图</div>
+                <ul id="section6-left-reading"></ul>
+            </div>
+
+            <p id="section6-left-connection" class="section6-connection"></p>
+
+            <div class="section6-copy-pager" id="section6-copy-pager" aria-label="Section 7 text pagination">
+                <button type="button" id="section6-copy-prev">上一段</button>
+                <span id="section6-copy-page-label">1 / 2</span>
+                <button type="button" id="section6-copy-next">下一段</button>
+            </div>
+        </div>
+
+        <div class="step-chart section6-chart" id="chart-portfolio-structure" data-chart-title="Country × Field Portfolio">
+            <div class="section6-tabs" role="tablist" aria-label="Section 7 chart views">
+                <button class="section6-tab active" type="button" data-section6-tab="map" aria-selected="true">01 空间扩散</button>
+                <button class="section6-tab" type="button" data-section6-tab="matrix" aria-selected="false">02 学科组合</button>
+                <button class="section6-tab" type="button" data-section6-tab="role" aria-selected="false">03 国家角色</button>
+            </div>
+
+            <div class="section6-panel active" data-section6-panel="map">
+                <div class="map-controls">
+                    <label>
+                        学科筛选：
+                        <select id="flow-field-select">
+                            <option value="__all__">全部学科</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Top N 国家：
+                        <input id="flow-topn" type="range" min="5" max="25" step="1" value="12">
+                        <span id="flow-topn-value">12</span>
+                    </label>
+
+                    <label>
+                        最小人数：
+                        <input id="flow-min-count" type="range" min="1" max="50" step="1" value="10">
+                        <span id="flow-min-count-value">10</span>
+                    </label>
+
+                    <div class="map-button-row">
+                        <button id="flow-zoom-in">放大 +</button>
+                        <button id="flow-zoom-out">缩小 −</button>
+                        <button id="flow-zoom-reset">重置地图</button>
+                        <button id="flow-reset">重置筛选</button>
+                    </div>
+                </div>
+
+                <div class="flow-layout">
+                    <div id="flow-map"></div>
+
+                    <div class="flow-side-panel">
+                        <div class="side-card">
+                            <div class="side-card-title">图例</div>
+                            <div id="flow-legend-panel"></div>
+                        </div>
+
+                        <div class="side-card">
+                            <div class="side-card-title">欧洲局部地图</div>
+                            <div id="europe-network"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section6-panel" data-section6-panel="matrix">
+                <div id="heatmap"></div>
+                <div id="heatmap-legend-row" class="bottom-legend-row"></div>
+            </div>
+
+            <div class="section6-panel" data-section6-panel="role">
+                <div class="controls">
+                    <label>
+                        聚焦国家：
+                        <select id="country-focus-select">
+                            <option value="">全部国家</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" id="toggle-labels" checked>
+                        显示重点国家标签
+                    </label>
+
+                    <button id="reset-country-focus">重置高亮</button>
+                </div>
+
+                <div class="view-layout">
+                    <div id="diversity"></div>
+                </div>
+
+                <div class="role-bottom-area">
+                    <div id="diversity-legend-row" class="bottom-legend-row"></div>
+
+                    <div id="portfolio-card">
+                        <div class="card-title">国家画像</div>
+                        <p>将鼠标悬停在国家点上，或从下拉菜单选择国家，这里会显示该国的学科组合、主导学科和专业化学科。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </article>
 
 <footer>
@@ -310,4 +429,5 @@
 <script src="js/scrollytelling.js"></script>
 <script src="js/main.js"></script>
 <script src="js/influence_chart.js"></script>
+<script src="js/section6_portfolio.js"></script>
 </html>

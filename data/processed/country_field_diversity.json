@@ -1,0 +1,554 @@
+[
+  {
+    "cntry": "grc",
+    "field_diversity": 0.8018819241120572,
+    "total": 33956,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 13756,
+        "share": 0.4051124985275062
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 3786,
+        "share": 0.11149723171162682
+      },
+      {
+        "field": "Engineering",
+        "n": 2303,
+        "share": 0.0678230651431264
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "usa",
+    "field_diversity": 0.8317309956534988,
+    "total": 8339,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 2930,
+        "share": 0.3513610744693608
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 941,
+        "share": 0.11284326657872647
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 791,
+        "share": 0.09485549826118239
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "gbr",
+    "field_diversity": 0.8503879547617776,
+    "total": 5896,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 1889,
+        "share": 0.3203867028493894
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 785,
+        "share": 0.13314111261872455
+      },
+      {
+        "field": "Engineering",
+        "n": 511,
+        "share": 0.08666892808683853
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "deu",
+    "field_diversity": 0.8010551159239206,
+    "total": 1911,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 749,
+        "share": 0.39194139194139194
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 238,
+        "share": 0.12454212454212454
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 192,
+        "share": 0.10047095761381476
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "cyp",
+    "field_diversity": 0.8998618231659619,
+    "total": 1669,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 351,
+        "share": 0.21030557219892151
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 241,
+        "share": 0.14439784301977232
+      },
+      {
+        "field": "Engineering",
+        "n": 156,
+        "share": 0.09346914319952067
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "aus",
+    "field_diversity": 0.777880086946021,
+    "total": 1092,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 480,
+        "share": 0.43956043956043955
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 126,
+        "share": 0.11538461538461539
+      },
+      {
+        "field": "Engineering",
+        "n": 50,
+        "share": 0.045787545787545784
+      }
+    ],
+    "portfolio_type": "large_specialized_hub"
+  },
+  {
+    "cntry": "fra",
+    "field_diversity": 0.8727837658863626,
+    "total": 1034,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 238,
+        "share": 0.23017408123791103
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 180,
+        "share": 0.17408123791102514
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 152,
+        "share": 0.1470019342359768
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "can",
+    "field_diversity": 0.8299594588261026,
+    "total": 1012,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 364,
+        "share": 0.35968379446640314
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 115,
+        "share": 0.11363636363636363
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 109,
+        "share": 0.10770750988142293
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "che",
+    "field_diversity": 0.8232731301939058,
+    "total": 950,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 324,
+        "share": 0.3410526315789474
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 136,
+        "share": 0.1431578947368421
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 108,
+        "share": 0.11368421052631579
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "nld",
+    "field_diversity": 0.8920288531775018,
+    "total": 592,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 112,
+        "share": 0.1891891891891892
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 99,
+        "share": 0.16722972972972974
+      },
+      {
+        "field": "Enabling & Strategic Technologies",
+        "n": 71,
+        "share": 0.11993243243243243
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "ita",
+    "field_diversity": 0.7900927060578614,
+    "total": 548,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 230,
+        "share": 0.4197080291970803
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 52,
+        "share": 0.0948905109489051
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 46,
+        "share": 0.08394160583941605
+      }
+    ],
+    "portfolio_type": "large_specialized_hub"
+  },
+  {
+    "cntry": "swe",
+    "field_diversity": 0.820989773519345,
+    "total": 537,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 192,
+        "share": 0.3575418994413408
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 79,
+        "share": 0.14711359404096835
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 48,
+        "share": 0.0893854748603352
+      }
+    ],
+    "portfolio_type": "large_generalist_hub"
+  },
+  {
+    "cntry": "bel",
+    "field_diversity": 0.8728928290680409,
+    "total": 428,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 105,
+        "share": 0.24532710280373832
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 57,
+        "share": 0.13317757009345793
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 55,
+        "share": 0.12850467289719625
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "esp",
+    "field_diversity": 0.8865699676510487,
+    "total": 259,
+    "top_fields": [
+      {
+        "field": "Information & Communication Technologies",
+        "n": 60,
+        "share": 0.23166023166023167
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 38,
+        "share": 0.14671814671814673
+      },
+      {
+        "field": "Clinical Medicine",
+        "n": 28,
+        "share": 0.10810810810810811
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "aut",
+    "field_diversity": 0.8452292899408285,
+    "total": 208,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 69,
+        "share": 0.3317307692307692
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 23,
+        "share": 0.11057692307692307
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 19,
+        "share": 0.09134615384615384
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "dnk",
+    "field_diversity": 0.8831736776343191,
+    "total": 196,
+    "top_fields": [
+      {
+        "field": "Information & Communication Technologies",
+        "n": 36,
+        "share": 0.1836734693877551
+      },
+      {
+        "field": "Clinical Medicine",
+        "n": 33,
+        "share": 0.1683673469387755
+      },
+      {
+        "field": "Enabling & Strategic Technologies",
+        "n": 29,
+        "share": 0.14795918367346939
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "nor",
+    "field_diversity": 0.8913395310324062,
+    "total": 163,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 29,
+        "share": 0.17791411042944785
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 28,
+        "share": 0.17177914110429449
+      },
+      {
+        "field": "Engineering",
+        "n": 25,
+        "share": 0.15337423312883436
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "irl",
+    "field_diversity": 0.8703630232096806,
+    "total": 142,
+    "top_fields": [
+      {
+        "field": "Information & Communication Technologies",
+        "n": 40,
+        "share": 0.28169014084507044
+      },
+      {
+        "field": "Clinical Medicine",
+        "n": 21,
+        "share": 0.14788732394366197
+      },
+      {
+        "field": "Engineering",
+        "n": 11,
+        "share": 0.07746478873239436
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "zaf",
+    "field_diversity": 0.8808532398275988,
+    "total": 117,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 33,
+        "share": 0.28205128205128205
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 12,
+        "share": 0.10256410256410256
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 9,
+        "share": 0.07692307692307693
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "fin",
+    "field_diversity": 0.8672520661157025,
+    "total": 88,
+    "top_fields": [
+      {
+        "field": "Information & Communication Technologies",
+        "n": 22,
+        "share": 0.25
+      },
+      {
+        "field": "Clinical Medicine",
+        "n": 16,
+        "share": 0.18181818181818182
+      },
+      {
+        "field": "Engineering",
+        "n": 10,
+        "share": 0.11363636363636363
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "are",
+    "field_diversity": 0.8628247931484976,
+    "total": 83,
+    "top_fields": [
+      {
+        "field": "Enabling & Strategic Technologies",
+        "n": 18,
+        "share": 0.21686746987951808
+      },
+      {
+        "field": "Economics & Business",
+        "n": 15,
+        "share": 0.18072289156626506
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 11,
+        "share": 0.13253012048192772
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "bra",
+    "field_diversity": 0.8526285550129273,
+    "total": 59,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 19,
+        "share": 0.3220338983050847
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 7,
+        "share": 0.11864406779661017
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 5,
+        "share": 0.0847457627118644
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "chn",
+    "field_diversity": 0.8494897959183674,
+    "total": 56,
+    "top_fields": [
+      {
+        "field": "Physics & Astronomy",
+        "n": 16,
+        "share": 0.2857142857142857
+      },
+      {
+        "field": "Information & Communication Technologies",
+        "n": 11,
+        "share": 0.19642857142857142
+      },
+      {
+        "field": "Clinical Medicine",
+        "n": 6,
+        "share": 0.10714285714285714
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  },
+  {
+    "cntry": "cze",
+    "field_diversity": 0.8938842975206611,
+    "total": 55,
+    "top_fields": [
+      {
+        "field": "Clinical Medicine",
+        "n": 10,
+        "share": 0.18181818181818182
+      },
+      {
+        "field": "Physics & Astronomy",
+        "n": 9,
+        "share": 0.16363636363636364
+      },
+      {
+        "field": "Biomedical Research",
+        "n": 6,
+        "share": 0.10909090909090909
+      }
+    ],
+    "portfolio_type": "small_generalist_node"
+  }
+]

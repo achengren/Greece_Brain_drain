@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-06-07T18:33:04",
+  "description": "Section 6 country-field portfolio analysis, including Greece as domestic reference",
+  "analysis_scope": "All scientists with valid country and field information",
+  "greece_included": true,
+  "domestic_reference_country": "grc",
+  "specialization_formula": "SI = (n_country_field / n_country_total) / (n_field_total / n_overall_total)",
+  "color_formula": "color = log2(SI), clipped to [-1.5, 1.5]",
+  "diversity_formula": "Field Diversity Index = 1 - sum(p_field^2)",
+  "min_country_total": 50,
+  "min_cell_n": 10,
+  "top_countries": [
+    "grc",
+    "usa",
+    "gbr",
+    "deu",
+    "cyp",
+    "aus",
+    "fra",
+    "can",
+    "che",
+    "nld"
+  ],
+  "top_fields": [
+    "Clinical Medicine",
+    "Information & Communication Technologies",
+    "Engineering",
+    "Physics & Astronomy",
+    "Biomedical Research",
+    "Enabling & Strategic Technologies",
+    "Chemistry",
+    "Economics & Business",
+    "Earth & Environmental Sciences",
+    "Agriculture, Fisheries & Forestry"
+  ],
+  "total_scientists_included": 60109,
+  "greece_count": 33956
+}
